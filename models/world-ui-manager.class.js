@@ -60,16 +60,16 @@ class WorldUiManager {
     }
 
     isBossDeath() {
-        return this.mainCharacter.deathCause === 'boss';
+        return this.world.mainCharacter.deathCause === 'boss';
     }
-    
+
     playBossDeath() {
-        this.mainCharacter.isCinematicDead = true;
-        setTimeout(() => this.ui.showGameOver(), 1500);
+        this.world.mainCharacter.isCinematicDead = true;
+        setTimeout(() => this.showGameOver(), 1500);
     }
 
     playNormalDeath() {
-        this.ui.showGameOver();
-        this.sound.playSound('characterDeath');
+        this.showGameOver();
+        this.world.sound.playSound('characterDeath');
     }
 }
