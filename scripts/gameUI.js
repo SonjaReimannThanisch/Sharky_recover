@@ -125,9 +125,7 @@ function bindGameHudUi(worldInstance) {
   });
 }
 
-function updateMuteButton(worldInstance) {
-  // worldInstance.sound.playSound('itemsSelect');
-  // worldInstance.sound.toggleMusic();
+function updateMuteButton(worldInstance) {;
   let btn = document.getElementById('btn-mute');
   if (!btn) return;
   btn.textContent = worldInstance.sound.isMuted ? '🔇' : '🔊';

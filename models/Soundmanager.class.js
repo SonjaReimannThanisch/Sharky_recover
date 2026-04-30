@@ -10,18 +10,13 @@ class SoundManager {
             finSlapAttack: new Audio('assets/soundeffects/attacks/fin-slap.mp3'),
             hit: new Audio('assets/soundeffects/character/hit-normal.mp3'),
             electroHit: new Audio('assets/soundeffects/character/hit-electro.mp3'),
-
             gameover: new Audio('assets/soundeffects/ui/game-over.mp3'),
             winning: new Audio('assets/soundeffects/ui/win.mp3'),
-
             barrier: new Audio('assets/soundeffects/ui/barrier-thud.mp3'),
-
             itemsSelect: new Audio('assets/soundeffects/ui/item-select.mp3'),
-
             collectCoin: new Audio('assets/soundeffects/collect/collect-coin.mp3'),
             collectBottle: new Audio('assets/soundeffects/collect/collect-bottle.mp3'),
             characterDeath: new Audio('assets/soundeffects/character/character-death.mp3'),
-
             endbossIntro: new Audio('assets/soundeffects/endboss/endboss-introduction.mp3'),
             endbossAttack: new Audio('assets/soundeffects/environment/endboss-attack.mp3'),
             endbossDeath: new Audio('assets/soundeffects/environment/endboss-death.mp3'),
@@ -31,7 +26,6 @@ class SoundManager {
         this.music = new Audio('assets/background-music/musicword-bubbles-309433.mp3');
         this.setupMusic();
         this.setupVolume();
-
     }
 
     setupMusic() {

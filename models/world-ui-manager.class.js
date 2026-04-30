@@ -1,10 +1,10 @@
 class WorldUiManager {
+
         constructor(world) {
         this.world = world;
     }
 
     showGameOver() {
-        // this.sound.stopMusic();
         this.world.sound.stopAllMusic();
         this.world.sound.stopAllSounds();
         this.freezeBossForGameOver();

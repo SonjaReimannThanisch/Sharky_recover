@@ -1,6 +1,4 @@
 class barriers extends movableObject {
-    // width = 20;
-    // height = 20;
 
   constructor(imagePath, x, y, width, height) {
     super();

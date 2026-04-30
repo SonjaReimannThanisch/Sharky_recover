@@ -1,4 +1,5 @@
 class WorldCollisionManager {
+
     constructor(world) {
         this.world = world;
     }
@@ -36,19 +37,6 @@ class WorldCollisionManager {
             barrier => this.world.mainCharacter.isColliding(barrier)
         );
     }
-
-    // checkBarrierCollision() {
-    //     if (!this.isBlockedByBarrierOrBoss()) {
-    //         this.rememberPlayerPosition();
-    //         return;
-    //     }
-    //     if (!this.barrierSoundPlayed) {
-    //         this.world.sound.playSound('barrier');
-    //         this.barrierSoundPlayed = true;
-    //     }
-    //     this.resetPlayerToLastPosition();
-    //     this.applyBarrierDamage();
-    // }
 
     checkBarrierCollision() {
         if (!this.isBlockedByBarrierOrBoss()) {

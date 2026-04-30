@@ -59,5 +59,3 @@ window.addEventListener("keyup", (event) => {
   if (event.code === "KeyY") keyboard.Y = false;
 
 });
-
-
