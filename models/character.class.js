@@ -237,7 +237,7 @@ class character extends movableObject {
         this.isSwimmingSoundPlaying = true;
         setTimeout(() => {
             this.isSwimmingSoundPlaying = false;
-        }, 300);
+        }, 200);
     }
 
 

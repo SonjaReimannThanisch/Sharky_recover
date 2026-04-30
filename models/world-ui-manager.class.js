@@ -4,7 +4,9 @@ class WorldUiManager {
     }
 
     showGameOver() {
-        this.sound.stopMusic();
+        // this.sound.stopMusic();
+        this.world.sound.stopAllMusic();
+        this.world.sound.stopAllSounds();
         this.freezeBossForGameOver();
         this.lockCameraOnPlayer();
         document.getElementById('gameover')?.classList.remove('hidden');

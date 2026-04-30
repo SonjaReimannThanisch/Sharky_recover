@@ -53,7 +53,7 @@ class SoundManager {
         let sound = this.sounds[name];
         if (!sound) return;
         sound.currentTime = 0;
-        sound.play();
+        sound.play().catch(() => {});
     }
 
     playMenu() {
@@ -61,7 +61,7 @@ class SoundManager {
         this.currentTrack = 'menu';
         this.music.pause();
         this.menuMusic.currentTime = 0;
-        this.menuMusic.play();
+        this.menuMusic.play().catch(() => {});
     }
 
     playMusic() {
@@ -69,7 +69,7 @@ class SoundManager {
         this.currentTrack = 'game';
         this.menuMusic.pause();
         this.music.currentTime = 0;
-        this.music.play();
+        this.music.play().catch(() => {});
     }
 
     toggleMusic() {
@@ -85,9 +85,9 @@ class SoundManager {
 
     resumeCurrentTrack() {
         if (this.currentTrack === 'menu') {
-            this.menuMusic.play();
+            this.menuMusic.play().catch(() => {});
         } else {
-            this.music.play();
+            this.music.play().catch(() => {});
         }
     }
 
@@ -99,8 +99,9 @@ class SoundManager {
     }
     
     stopAllSounds() {
-        Object.keys(this.sounds).forEach(name => {
-            this.stopSound(name);
+        Object.values(this.sounds).forEach(sound => {
+            sound.pause();
+            sound.currentTime = 0;
         });
     }
 

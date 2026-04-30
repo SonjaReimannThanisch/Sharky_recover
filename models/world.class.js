@@ -81,14 +81,13 @@ class world {
     }
 
     triggerGameOverIfDead() {
-        this.sound.stopAllMusic();
-        this.sound.stopAllSounds();
         if (this.mainCharacter.energy <= 0 && !this.isGameOver) {
             this.isGameOver = true;
             this.sound.stopAllSounds();
             this.sound.stopAllMusic();
             this.attacks = [];
             this.sound.playSound('gameover');
+
             if (this.mainCharacter.deathCause === 'boss') {
                 this.mainCharacter.isCinematicDead = true;
                 setTimeout(() => {

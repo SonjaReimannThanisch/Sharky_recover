@@ -47,8 +47,9 @@ function startFromStartscreen(worldInstance) {
 
 function bindStartUi(worldInstance) {
   document.getElementById('btn-start')?.addEventListener('click', () => {
-    updateStartMuteButton()
-    updateMuteButton()
+    worldInstance.sound.playSound('itemsSelect');
+    updateStartMuteButton(worldInstance)
+    updateMuteButton(worldInstance)
     startFromStartscreen(worldInstance);
   });
 
@@ -68,7 +69,7 @@ function bindStartUi(worldInstance) {
 }
 
 function updateStartMuteButton(worldInstance) {
-  worldInstance.sound.playSound('itemsSelect');
+  // worldInstance.sound.playSound('itemsSelect');
   let btn = document.getElementById('btn-mute-start');
   if (!btn) return;
   btn.textContent = worldInstance.sound.isMuted ? '🔇' : '🔊';
@@ -94,13 +95,15 @@ function exitFullscreen() {
 
 function bindGameHudUi(worldInstance) {
   document.getElementById('btn-mute')?.addEventListener('click', () => {
-    worldInstance.sound.toggleMusic();
+    worldInstance.sound.playSound('itemsSelect');
+    worldInstance.sound.toggleMusic()
     updateMuteButton(worldInstance);
   });
 }
 
 function updateMuteButton(worldInstance) {
-  worldInstance.sound.playSound('itemsSelect');
+  // worldInstance.sound.playSound('itemsSelect');
+  // worldInstance.sound.toggleMusic();
   let btn = document.getElementById('btn-mute');
   if (!btn) return;
   btn.textContent = worldInstance.sound.isMuted ? '🔇' : '🔊';
