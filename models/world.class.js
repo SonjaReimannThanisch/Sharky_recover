@@ -87,38 +87,38 @@ class world {
             this.sound.stopAllMusic();
             this.attacks = [];
             this.sound.playSound('gameover');
-
-            if (this.mainCharacter.deathCause === 'boss') {
-                this.mainCharacter.isCinematicDead = true;
-                setTimeout(() => {
-                    this.ui.showGameOver();
-                }, 1500);
-            } else {
-                this.ui.showGameOver();
-                this.sound.playSound('characterDeath');
-            }
+            this.ui.handleGameOver();
         }
     }
 
     applyDamage(amount = 5, type = 'poison', cause = '') {
         this.mainCharacter.setDamageType(type);
-        if (type === 'electro') {
-            this.sound.playSound('electroHit');
-        } else if (type === 'barrier') {
-            this.sound.playSound('barrier');
-        } else {
-            this.sound.playSound('hit');
-        }
+        this.playDamageSound(type);
         this.mainCharacter.deathCause = cause;
-        this.mainCharacter.energy -= amount;
-        if ( this.mainCharacter.energy < 0) {
-            this.mainCharacter.energy = 0;
-        } else {
-            this.mainCharacter.lastHit = new Date().getTime();
-        }
-        
+        this.reduceCharacterEnergy(amount);
         this.statusLife.setPercentage(this.mainCharacter.energy);
         this.triggerGameOverIfDead();
+    }
+
+    playDamageSound(type) {
+        if (type === 'electro') {
+            this.sound.playSound('electroHit');
+            return;
+        }
+        if (type === 'barrier') {
+            this.sound.playSound('barrier');
+            return;
+        }
+        this.sound.playSound('hit');
+    }
+
+    reduceCharacterEnergy(amount) {
+        this.mainCharacter.energy -= amount;
+        if (this.mainCharacter.energy < 0) {
+            this.mainCharacter.energy = 0;
+            return;
+        }
+        this.mainCharacter.lastHit = new Date().getTime();
     }
 
     getEndboss() {
@@ -138,8 +138,7 @@ class world {
         ];
         let leftEdge = -this.camera_x;
         let rightEdge = leftEdge + w;
-        groups.forEach(g => {
-            g.forEach(bg => {
+        groups.forEach(g => { g.forEach(bg => {
             if (bg.x + w < leftEdge) bg.x += w * g.length
             if (bg.x > rightEdge) bg.x -= w * g.length;
             });

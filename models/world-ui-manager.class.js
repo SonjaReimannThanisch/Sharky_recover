@@ -50,4 +50,26 @@ class WorldUiManager {
         }
         this.world.addToMap(this.world.winScreen);
     }
+
+    handleGameOver() {
+        if (this.isBossDeath()) {
+            this.playBossDeath();
+            return;
+        }
+        this.playNormalDeath();
+    }
+
+    isBossDeath() {
+        return this.mainCharacter.deathCause === 'boss';
+    }
+    
+    playBossDeath() {
+        this.mainCharacter.isCinematicDead = true;
+        setTimeout(() => this.ui.showGameOver(), 1500);
+    }
+
+    playNormalDeath() {
+        this.ui.showGameOver();
+        this.sound.playSound('characterDeath');
+    }
 }
