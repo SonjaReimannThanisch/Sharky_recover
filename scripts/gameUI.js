@@ -29,6 +29,30 @@ function injectStartScreen() {
   document.getElementById('fullscreen').insertAdjacentHTML('beforeend', markup);
 }
 
+function injectMobileControls() {
+  if (document.getElementById('mobile-controls')) return;
+
+  let markup = `
+    <div id="mobile-controls" class="mobile-controls">
+      <div class="mobile-move">
+        <button id="mobile-up">▲</button>
+        <div>
+          <button id="mobile-left">◀</button>
+          <button id="mobile-down">▼</button>
+          <button id="mobile-right">▶</button>
+        </div>
+      </div>
+
+      <div class="mobile-action">
+        <button id="mobile-fin">Fin</button>
+        <button id="mobile-bubble">Bubble</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('fullscreen')?.insertAdjacentHTML('beforeend', markup);
+}
+
 function injectGameHud() {
   if (document.getElementById('btn-mute')) return;
 
@@ -107,4 +131,31 @@ function updateMuteButton(worldInstance) {
   let btn = document.getElementById('btn-mute');
   if (!btn) return;
   btn.textContent = worldInstance.sound.isMuted ? '🔇' : '🔊';
+}
+
+function bindMobileControls(worldInstance) {
+  bindMobileButton('mobile-left', worldInstance, 'LEFT');
+  bindMobileButton('mobile-right', worldInstance, 'RIGHT');
+  bindMobileButton('mobile-up', worldInstance, 'UP');
+  bindMobileButton('mobile-down', worldInstance, 'DOWN');
+  bindMobileButton('mobile-fin', worldInstance, 'SPACE');
+  bindMobileButton('mobile-bubble', worldInstance, 'A');
+
+  document.getElementById('mobile-controls')
+    ?.addEventListener('contextmenu', event => event.preventDefault());
+}
+
+function bindMobileButton(id, worldInstance, key) {
+  let button = document.getElementById(id);
+  if (!button) return;
+
+  button.addEventListener('touchstart', event => {
+    event.preventDefault();
+    worldInstance.keyboard[key] = true;
+  });
+
+  button.addEventListener('touchend', event => {
+    event.preventDefault();
+    worldInstance.keyboard[key] = false;
+  });
 }
