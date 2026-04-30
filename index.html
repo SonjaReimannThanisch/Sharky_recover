@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html translate="no" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/shark (1).png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="./img/shark.png" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="style.css">
+    <script src="./models/drawable-object.class.js"></script>
+    <script src="./models/world-ui-manager.class.js"></script>
+    <script src="./models/world-collision-manager.class.js"></script>
+    <script src="./models/world-collectible-manager.class.js"></script>
+    <script src="./models/combat-manager.class.js"></script>
+    <script src="./models/world.class.js"></script>
+    <script src="./models/movable-objects.class.js"></script>
+    <script src="./models/Soundmanager.class.js"></script>
+    <script src="./models/background-object.class.js"></script>
+    <script src="./models/barriers.class.js"></script>
+    <script src="./models/collider.class.js"></script>
+    <script src="./models/lights.class.js"></script>
+    <script src="./levels/pufferfish-images.js"></script>
+    <script src="./models/pufferfish.class.js"></script>
+    <script src="./levels/jellyfish-images.js"></script>
+    <script src="./models/jellyfisch.class.js"></script>
+    <script src="./levels/character-images.js"></script>
+    <script src="./models/character.class.js"></script>
+    <script src="./models/status-bar.class.js"></script>
+    <script src="./models/coin.class.js"></script>
+    <script src="./models/poison.class.js"></script>
+    <script src="./models/attack.class.js"></script>
+    <script src="./levels/bubble-images.js"></script>
+    <script src="./models/bubble-trap-attack.class.js"></script>
+    <script src="./models/fin-slap-attack.class.js"></script>
+    <script src="./models/keyboard.class.js"></script>
+    <script src="./models/gameOverScreen.class.js"></script>
+    <script src="./models/win-screen.class.js"></script>
+    <script src="./models/level.class.js"></script>
+    <script src="./levels/endboss-images.js"></script>
+    <script src="./models/endboss.class.js"></script>
+    <script src="./levels/level1.js"></script>
+    <script src="./scripts/gameUI.js"></script>
+
+    <!-- <script src="./elliot.js"></script> -->
+
+
+    <title>Sharky</title>
+</head>
+<body onload="init()">
+    <main>
+        <section class="game">
+            <header>
+                <h1>Sharky</h1>
+            </header>
+
+            <div id="fullscreen">
+                <canvas id="backgroundCanvas" width="720" height="480"></canvas>
+            </div>
+
+            <div id="gameover" class="overlay hidden">
+            <div class="banner">
+                <img id="gameoverImg" src="img/6.Botones/Tittles/Game Over/Recurso 11.png" alt="Game Over">
+                <div class="actions">
+                <button id="btn-restart" class="btn">Try again</button>
+                <button id="btn-home" class="btn btn-secondary">Home</button>
+                </div>
+            </div>
+            </div>
+            <footer>
+                <p></p>
+            </footer>
+        </section>
+    </main>
+    <script defer src="./scripts/game.js"></script>
+</body>
+</html>  
