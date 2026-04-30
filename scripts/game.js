@@ -21,7 +21,7 @@ function init() {
 
 function setupAudioUnlock() {
   const unlock = () => {
-    if (!gameWorld.sound.isMuted && !gameWorld.hasStarted) {
+    if (gameWorld.sound && !gameWorld.sound.isMuted && !gameWorld.hasStarted) {
       gameWorld.sound.playMenu();
     }
   };

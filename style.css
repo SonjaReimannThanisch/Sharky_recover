@@ -325,6 +325,17 @@ canvas {
 @media (orientation: portrait) and (max-width: 600px) {
   body::before {
     content: "Turn your device to play";
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: var(--color-dark);
+    color: var(--color-accent);
+    font-family: var(--font-main);
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .game {
