@@ -1,4 +1,5 @@
 class CombatWorld {
+    
     constructor(world) {
         this.world = world;
     }

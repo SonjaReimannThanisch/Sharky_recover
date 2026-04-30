@@ -14,7 +14,6 @@ class BubbleTrapAttack extends Attack {
         this.type = type;
         this.character = character;
         this.otherDirection = this.character.otherDirection;
-
         this.loadAllImages();
         this.setStartImage();
         this.getBubbleImages();

@@ -1,4 +1,5 @@
 class coin extends drawableObject {
+    
     height = 60;
     width = 60;
 
