@@ -55,7 +55,6 @@ class WorldCollisionManager {
     }   
 
     isBlockedByBarrierOrBoss() {
-        // let hitBarrier = this.isCollidingWithAnyBarrier();
         return this.isCollidingWithAnyBarrier();
         let boss = this.world.getEndboss();
         let hitBoss =
