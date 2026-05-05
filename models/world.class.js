@@ -93,11 +93,15 @@ class world {
 
     applyDamage(amount = 5, type = 'poison', cause = '') {
         this.mainCharacter.setDamageType(type);
-        this.playDamageSound(type);
         this.mainCharacter.deathCause = cause;
         this.reduceCharacterEnergy(amount);
         this.statusLife.setPercentage(this.mainCharacter.energy);
+        if (this.mainCharacter.energy <= 0) {
         this.triggerGameOverIfDead();
+        return;
+        }
+        this.playDamageSound(type);
+        // this.triggerGameOverIfDead();
     }
 
     playDamageSound(type) {
@@ -244,6 +248,8 @@ class world {
         this.ui.hideGameOver();
         this.resetWorldState();
         this.hasStarted = true;
+        this.sound.stopAllMusic();
+        this.sound.playMusic();
         this.mainCharacter.animate();
         this.collision.checkCollisions();
     }
