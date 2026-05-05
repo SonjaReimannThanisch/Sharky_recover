@@ -1,30 +1,30 @@
 class WorldCollisionManager {
 
-    constructor(world) {
-        this.world = world;
+    constructor(World) {
+        this.World = World;
     }
 
     checkCollisions() {
-        if (this.world.enemyCollisionInterval) return;
-        this.world.enemyCollisionInterval = setInterval(
+        if (this.World.enemyCollisionInterval) return;
+        this.World.enemyCollisionInterval = setInterval(
             this.runEnemyCollisionCheck.bind(this),
             1000
         );
     }
 
     runEnemyCollisionCheck() {
-        this.world.level.enemies.forEach(this.checkEnemyCollision.bind(this));
+        this.World.level.enemies.forEach(this.checkEnemyCollision.bind(this));
     }
 
     checkEnemyCollision(enemy) {
         if (enemy.isDead) return;
 
         if (
-            this.world.mainCharacter.isColliding(enemy) &&
-            !this.world.mainCharacter.isHurt()
+            this.World.mainCharacter.isColliding(enemy) &&
+            !this.World.mainCharacter.isHurt()
         ) {
             let cause = enemy instanceof Endboss ? 'boss' : '';
-            this.world.applyDamage(
+            this.World.applyDamage(
                 enemy.damage || 5,
                 enemy.damageType || 'poison',
                 cause
@@ -33,8 +33,8 @@ class WorldCollisionManager {
     }
 
     isCollidingWithAnyBarrier() {
-        return this.world.level.barriers.some(
-            barrier => this.world.mainCharacter.isColliding(barrier)
+        return this.World.level.Barriers.some(
+            barrier => this.World.mainCharacter.isColliding(barrier)
         );
     }
 
@@ -46,7 +46,7 @@ class WorldCollisionManager {
         }
 
         if (!this.barrierSoundPlayed) {
-            this.world.sound.playSound('barrier');
+            this.World.sound.playSound('barrier');
             this.barrierSoundPlayed = true;
         }
 
@@ -56,31 +56,31 @@ class WorldCollisionManager {
 
     isBlockedByBarrierOrBoss() {
         return this.isCollidingWithAnyBarrier();
-        let boss = this.world.getEndboss();
+        let boss = this.World.getEndboss();
         let hitBoss =
             boss &&
             boss.isCollidable() &&
-            this.world.mainCharacter.isColliding(boss);
+            this.World.mainCharacter.isColliding(boss);
 
         return hitBarrier || hitBoss;
     }
 
     applyBarrierDamage() {
         if (
-            this.world.isPressingIntoBarrier() &&
-            !this.world.mainCharacter.isHurt()
+            this.World.isPressingIntoBarrier() &&
+            !this.World.mainCharacter.isHurt()
         ) {
-            this.world.applyDamage(5, 'barrier');
+            this.World.applyDamage(5, 'barrier');
         }
     }
 
     resetPlayerToLastPosition() {
-        this.world.mainCharacter.x = this.world.lastX;
-        this.world.mainCharacter.y = this.world.lastY;
+        this.World.mainCharacter.x = this.World.lastX;
+        this.World.mainCharacter.y = this.World.lastY;
     }
 
     rememberPlayerPosition() {
-        this.world.lastX = this.world.mainCharacter.x;
-        this.world.lastY = this.world.mainCharacter.y;
+        this.World.lastX = this.World.mainCharacter.x;
+        this.World.lastY = this.World.mainCharacter.y;
     }
 }

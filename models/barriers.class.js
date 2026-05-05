@@ -1,4 +1,4 @@
-class barriers extends movableObject {
+class Barriers extends MovableObject {
 
   constructor(imagePath, x, y, width, height) {
     super();

@@ -1,4 +1,4 @@
-class poison extends drawableObject {
+class Poison extends DrawableObject {
     height = 100;
     width = 60;
 

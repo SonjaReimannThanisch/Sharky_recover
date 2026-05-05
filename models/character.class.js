@@ -1,4 +1,4 @@
-class character extends movableObject {
+class Character extends MovableObject {
 
     height = 280;
     width = 200;
@@ -62,7 +62,7 @@ class character extends movableObject {
     setMaxY() {
         let o = this.offset || { top: 0, left: 0, right: 0, bottom: 0 };
         let hitboxHeight = this.height - o.top - o.bottom;
-        this.maxY = this.world.canvas.height - hitboxHeight - o.top;
+        this.maxY = this.World.canvas.height - hitboxHeight - o.top;
     }
 
     startMovementLoop() {
@@ -88,40 +88,40 @@ class character extends movableObject {
     }
 
     updateCamera() {
-        this.world.camera_x = -this.x;
+        this.World.camera_x = -this.x;
     }
 
     moveRight() {
-        if (!this.world.keyboard.RIGHT) return;
-        if (this.x >= this.world.level.level_end_x) return;
+        if (!this.World.keyboard.RIGHT) return;
+        if (this.x >= this.World.level.level_end_x) return;
         this.x += this.speed;
         this.otherDirection = false;
-        this.world.hasPlayerMoved = true;
+        this.World.hasPlayerMoved = true;
         this.lastActionTime = Date.now();
     }
 
     moveLeft() {
-        if (!this.world.keyboard.LEFT) return;
+        if (!this.World.keyboard.LEFT) return;
         if (this.x <= 0) return;
         this.x -= this.speed;
         this.otherDirection = true;
-        this.world.hasPlayerMoved = true;
+        this.World.hasPlayerMoved = true;
         this.lastActionTime = Date.now();
     }
 
     moveUp() {
-        if (!this.world.keyboard.UP) return;
+        if (!this.World.keyboard.UP) return;
         if (this.y <= this.minY) return;
         this.y = Math.max(this.minY, this.y - this.speed);
-        this.world.hasPlayerMoved = true;
+        this.World.hasPlayerMoved = true;
         this.lastActionTime = Date.now();
     }
 
     moveDown() {
-        if (!this.world.keyboard.DOWN) return;
+        if (!this.World.keyboard.DOWN) return;
         if (this.y >= this.maxY) return;
         this.y = Math.min(this.maxY, this.y + this.speed);
-        this.world.hasPlayerMoved = true;
+        this.World.hasPlayerMoved = true;
         this.lastActionTime = Date.now();
     }
 
@@ -234,15 +234,15 @@ class character extends movableObject {
     }
 
     isMoving() {
-        return this.world.keyboard.RIGHT ||
-            this.world.keyboard.LEFT ||
-            this.world.keyboard.UP ||
-            this.world.keyboard.DOWN;
+        return this.World.keyboard.RIGHT ||
+            this.World.keyboard.LEFT ||
+            this.World.keyboard.UP ||
+            this.World.keyboard.DOWN;
     }
 
     stopSleepSound() {
         if (!this.isSleepingSoundPlaying) return;
-        this.world.sound.stopSound('sleep');
+        this.World.sound.stopSound('sleep');
         this.isSleepingSoundPlaying = false;
     }
 
@@ -252,7 +252,7 @@ class character extends movableObject {
 
     playSwimSound() {
         if (this.isSwimmingSoundPlaying) return;
-        this.world.sound.playSound('swim');
+        this.World.sound.playSound('swim');
         this.isSwimmingSoundPlaying = true;
         setTimeout(() => {
             this.isSwimmingSoundPlaying = false;
@@ -272,15 +272,15 @@ class character extends movableObject {
     }
 
     canIdle() {
-        return !this.world || !this.world.hasStarted || this.world.isGameOver;
+        return !this.World || !this.World.hasStarted || this.World.isGameOver;
     }
 
     idleDuringBossFight() {
-        return this.world && this.world.bossFightStarted && !this.isDead();
+        return this.World && this.World.bossFightStarted && !this.isDead();
     }
 
     playIdleAnimation() {
-        if (this.isSleeping() && this.world.hasPlayerMoved) {
+        if (this.isSleeping() && this.World.hasPlayerMoved) {
             this.playAnimation(this.images.LONG_IDLE);
             this.playSleepSound();
             return;
@@ -291,7 +291,7 @@ class character extends movableObject {
 
     playSleepSound() {
         if (this.isSleepingSoundPlaying) return;
-        this.world.sound.playSound('sleep');
+        this.World.sound.playSound('sleep');
         this.isSleepingSoundPlaying = true;
     }
 

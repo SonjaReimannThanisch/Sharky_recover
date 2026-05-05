@@ -1,4 +1,4 @@
-class GameOverScreen extends drawableObject {
+class GameOverScreen extends DrawableObject {
 
     IMAGES_GAMEOVER = [
         'img/6.Botones/Tittles/Game Over/Recurso 11.png',

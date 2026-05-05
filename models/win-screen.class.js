@@ -1,4 +1,4 @@
-class WinScreen extends drawableObject {
+class WinScreen extends DrawableObject {
 
     alpha = 0;
 

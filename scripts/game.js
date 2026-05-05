@@ -8,7 +8,7 @@ function init() {
 
   canvas = document.getElementById('backgroundCanvas');
   keyboard = new Keyboard(canvas.width, canvas.height);
-  gameWorld = new world(canvas, keyboard);
+  gameWorld = new World(canvas, keyboard);
   bindStartUi(gameWorld);
   updateStartMuteButton(gameWorld);
   injectGameHud();

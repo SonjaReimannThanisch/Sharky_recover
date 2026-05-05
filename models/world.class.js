@@ -1,5 +1,5 @@
-class world {
-    mainCharacter = new character();
+class World {
+    mainCharacter = new Character();
     level;
     canvas;
     ctx;
@@ -223,9 +223,9 @@ class world {
     drawWorldLayer() {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.background);
-        this.addObjectsToMap(this.level.barriers);
+        this.addObjectsToMap(this.level.Barriers);
         this.addObjectsToMap(this.level.lights);
-        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.Coins);
         this.addObjectsToMap(this.level.poison);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.mainCharacter);
@@ -288,7 +288,7 @@ class world {
 
     resetLevelState() {
         this.level = createLevel1();
-        this.mainCharacter = new character();
+        this.mainCharacter = new Character();
         this.setWorld();
         this.setWorldForLevelObjects();
     }

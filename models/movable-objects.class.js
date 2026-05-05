@@ -1,4 +1,4 @@
-class movableObject extends drawableObject {
+class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     energy = 100;
@@ -7,7 +7,7 @@ class movableObject extends drawableObject {
     
     drawFrame(ctx) {
         if (!window.DEBUG) return;
-        if(this instanceof character || this instanceof pufferfisch || this instanceof jellyfisch || this instanceof Endboss || this instanceof barriers || this instanceof Attack) {
+        if(this instanceof Character || this instanceof Pufferfisch || this instanceof Jellyfisch || this instanceof Endboss || this instanceof Barriers || this instanceof Attack) {
             ctx.beginPath();
             ctx.lineWidth = 2;
             ctx.strokeStyle = 'blue';

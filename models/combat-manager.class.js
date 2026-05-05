@@ -31,10 +31,10 @@ class CombatWorld {
 
     canAttackHitEnemy(attack, enemy) {
         if (attack instanceof BubbleTrapAttack) {
-            return enemy instanceof jellyfisch || enemy instanceof Endboss;
+            return enemy instanceof Jellyfisch || enemy instanceof Endboss;
         }
         if (attack instanceof FinSlapAttack) {
-            return enemy instanceof pufferfisch;
+            return enemy instanceof Pufferfisch;
         }
         return true;
     }

@@ -1,4 +1,4 @@
-class drawableObject {
+class DrawableObject {
     x = 10;
     y = 280;
     width = 150;

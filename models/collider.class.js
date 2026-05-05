@@ -1,4 +1,4 @@
-class Collider extends drawableObject {
+class Collider extends DrawableObject {
   constructor(x, y, width, height) {
     super();
     this.x = x;

@@ -1,4 +1,4 @@
-class Attack extends movableObject {
+class Attack extends MovableObject {
     damage = 20;
     lifetime = 200;
     createdAt = 0;

@@ -1,4 +1,4 @@
-class Wave extends movableObject {
+class Wave extends MovableObject {
     constructor(canvasWidth, canvasHeight) {
         super();
         this.loadImage('img/3.Background/Layers/5.Water/D1.png');
