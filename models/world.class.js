@@ -44,9 +44,9 @@ class World {
 
     initHud() {
         this.keyboardSprite = new Keyboard(this.canvas.width, this.canvas.height);
-        this.statusLife = new statusBar('life');
-        this.statusCoins = new statusBar('coins');
-        this.statusPoison = new statusBar('poison');
+        this.statusLife = new StatusBar('life');
+        this.statusCoins = new StatusBar('coins');
+        this.statusPoison = new StatusBar('poison');
         this.statusLife.y = 45;
         this.statusCoins.y = 80;
         this.statusPoison.y = 10;
@@ -223,9 +223,9 @@ class World {
     drawWorldLayer() {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.background);
-        this.addObjectsToMap(this.level.Barriers);
+        this.addObjectsToMap(this.level.barriers);
         this.addObjectsToMap(this.level.lights);
-        this.addObjectsToMap(this.level.Coins);
+        this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.poison);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.mainCharacter);

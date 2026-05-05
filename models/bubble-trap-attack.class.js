@@ -12,8 +12,8 @@ class BubbleTrapAttack extends Attack {
         super();
         this.images = BUBBLE_IMAGES;
         this.type = type;
-        this.character = Character;
-        this.otherDirection = this.Character.otherDirection;
+        this.character = character;
+        this.otherDirection = this.character.otherDirection;
         this.loadAllImages();
         this.setStartImage();
         this.getBubbleImages();
@@ -42,11 +42,11 @@ class BubbleTrapAttack extends Attack {
     }
 
     setStartPosition() {
-        this.otherDirection = this.Character.otherDirection;
-        this.x = this.Characterharacter.x + this.Characterharacter.width - 10;
-        this.y = this.Characterharacter.y + this.Characterharacter.height / 2;
+        this.otherDirection = this.character.otherDirection;
+        this.x = this.character.x + this.character.width - 10;
+        this.y = this.character.y + this.character.height / 2;
         if (this.otherDirection) {
-            this.x = this.Characterharacter.x - this.width + 10;
+            this.x = this.character.x - this.width + 10;
         }
     }
 
