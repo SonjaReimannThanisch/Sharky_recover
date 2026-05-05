@@ -11,11 +11,11 @@ function createLevel1() {
 
 function createEnemies() {
     return [
-        new Jellyfisch('lila', 900, 180),
-        new Jellyfisch('lila', 1200, 260),
+        new Jellyfisch('green', 500, 180),
+        new Jellyfisch('yellow', 800, 260),
 
         new Pufferfisch('pink', 1500, 220),
-        new Jellyfisch('yellow', 1800, 140),
+        new Jellyfisch('lila', 1800, 140),
 
         new Pufferfisch('rose', 2300, 280),
         new Jellyfisch('green', 2600, 160),
@@ -30,22 +30,33 @@ function createEnemies() {
 
 function createCoins() {
     return [
-        new Coin(240, 320),
-        new Coin(280, 260),
-        new Coin(340, 220),
-        new Coin(420, 220),
-        new Coin(480, 260),
-        new Coin(520, 320),
+        new Coin(260, 320),
+        new Coin(340, 260),
+        new Coin(420, 320),
+        new Coin(1500, 300),
+        new Coin(1580, 240),
+        new Coin(1660, 210),
+        new Coin(1740, 240),
+        new Coin(1820, 300),
+        new Coin(3180, 220),
+        new Coin(3260, 250),
+        new Coin(3340, 280),
+        new Coin(3580, 340),
+        new Coin(3660, 340),
+        // new Coin(3580, 280),
+        new Coin(3760, 260),
+        new Coin(3820, 230),
+        new Coin(3880, 260),
     ];
 }
 
 function createPoison() {
     return [
-        new Poison(290, 350),
-        new Poison(350, 350),
-        new Poison(410, 350),
-        new Poison(470, 350),
-        new Poison(530, 350),
+        new Poison(760, 340),
+        new Poison(1380, 340),
+        new Poison(2100, 320),
+        new Poison(3220, 330),
+        new Poison(3680, 330),
     ];
 }
 
@@ -71,21 +82,21 @@ function createBackground() {
 
 function createBarriers() {
     return [
-        new Barriers('img/3.Background/Barrier/2.png', 1630, 200, 600, 280),
-        new Barriers('img/3.Background/Barrier/3.png', 3440, 10, 200, 240),
+        new Barriers('img/3.Background/Barrier/2.png', 950, 150, 420, 320),
         ...createCaveBarrier(),
+        new Barriers('img/3.Background/Barrier/3.png', 3450, 20, 220, 260),
     ];
 }
 
 function createCaveBarrier() {
-    let caveDeco = new Barriers('img/3.Background/Barrier/1.png', 2540, 0, 850, 480);
+    let caveDeco = new Barriers('img/3.Background/Barrier/1.png', 2300, 0, 850, 480);
     caveDeco.offset = { top: 9999, left: 9999, right: 9999, bottom: 9999 };
 
-    let caveTop = new Barriers('', 2540, 0, 850, 140);
-    caveTop.offset = { top: 0, left: 0, right: 0, bottom: 0 };
+    let caveTop = new Barriers('', 2300, 0, 850, 120);
+    caveTop.offset = { top: 0, left: 30, right: 30, bottom: 10 };
 
-    let caveBottom = new Barriers('', 2540, 340, 850, 140);
-    caveBottom.offset = { top: 0, left: 0, right: 0, bottom: 0 };
+    let caveBottom = new Barriers('', 2300, 360, 850, 120);
+    caveBottom.offset = { top: 10, left: 30, right: 30, bottom: 0 };
 
     return [caveDeco, caveTop, caveBottom];
 }

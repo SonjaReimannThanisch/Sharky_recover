@@ -22,7 +22,7 @@ class World {
     TILE_WIDTH = 720;
     enemyCollisionInterval = null;
     hasStarted = false;
-    bossTriggerX = 3600;
+    bossTriggerX = 3800;
     bossFightStarted = false;
     bubbles = [];
 
