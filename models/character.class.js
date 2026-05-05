@@ -214,6 +214,7 @@ class character extends movableObject {
             this.world.keyboard.DOWN
         ) {
             this.stopSleepsound();
+            this.world.sound.stopSound('sleep');
             this.playAnimation(this.images.SWIM);
             this.playSwimSound();
             return true;
@@ -239,7 +240,6 @@ class character extends movableObject {
             this.isSwimmingSoundPlaying = false;
         }, 200);
     }
-
 
     handleIdle() {
         if (!this.world || !this.world.hasStarted || this.world.isGameOver) {
