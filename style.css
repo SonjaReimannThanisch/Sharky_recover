@@ -160,6 +160,10 @@ canvas {
   color: #fb7aa9;
 }
 
+.btn:active {
+  transform: scale(0.95);
+}
+
 .overlay-start,
 #startscreen.overlay {
   position: absolute;

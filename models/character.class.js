@@ -60,6 +60,7 @@ class Character extends MovableObject {
     }
 
     setMaxY() {
+        if (!this.world) return;
         let o = this.offset || { top: 0, left: 0, right: 0, bottom: 0 };
         let hitboxHeight = this.height - o.top - o.bottom;
         this.maxY = this.world.canvas.height - hitboxHeight - o.top;
