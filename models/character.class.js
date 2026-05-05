@@ -68,7 +68,7 @@ class Character extends MovableObject {
     startMovementLoop() {
         if (this.movementInterval) return;
         this.movementInterval = setInterval(() => {
-            this.handleMovementinput();
+            this.handleMovementInput();
         }, 1000 / 60);
     }
 
@@ -79,7 +79,7 @@ class Character extends MovableObject {
         }, 80);
     }
 
-    handleMovementinput() {
+    handleMovementInput() {
         this.moveRight();
         this.moveLeft();
         this.moveUp();
@@ -272,7 +272,7 @@ class Character extends MovableObject {
     }
 
     canIdle() {
-        return !this.world || !this.world.hasStarted || this.world.isGameOver;
+        return this.world || !this.world.hasStarted || this.world.isGameOver;
     }
 
     idleDuringBossFight() {
