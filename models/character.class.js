@@ -42,12 +42,12 @@ class Character extends MovableObject {
         this.loadImages(this.images.IDLE);
         this.loadImages(this.images.LONG_IDLE);
         this.loadImages(this.images.SWIM);
-        this.loadImages(this.images.POISENED);
-        this.loadImages(this.images.POIHURT);
-        this.loadImages(this.images.ELECTROHURT);
-        this.loadImages(this.images.ELECTRODEAD);
-        this.loadImages(this.images.BUBBLEATTACK);
-        this.loadImages(this.images.FINSLAP);
+        this.loadImages(this.images.POISEN);
+        this.loadImages(this.images.POISEN_HURT);
+        this.loadImages(this.images.ELECTRO_HURT);
+        this.loadImages(this.images.ELECTRO_DEAD);
+        this.loadImages(this.images.BUBBLE_ATTACK);
+        this.loadImages(this.images.FIN_SLAP);
         this.loadImages(this.images.WHALE_ATTACK);
         this.loadImages(this.images.WHALE_ATTACK_BUBBLE);
         this.loadImages(this.images.DEAD_CINEMATIC);
@@ -149,7 +149,7 @@ class Character extends MovableObject {
 
     handleFinSlap(now) {
         if (!this.isFinSlapAttacking) return false;
-        this.playAnimation(this.images.FINSLAP);
+        this.playAnimation(this.images.FIN_SLAP);
         if (now - this.finSlapAttackStartedAt > this.finSlapAttackDuration) {
             this.isFinSlapAttacking = false;
         }
@@ -190,7 +190,7 @@ class Character extends MovableObject {
         if (this.bubbleAttackType === 'poison') {
             return this.images.WHALE_ATTACK_BUBBLE;
         }
-        return this.images.BUBBLEATTACK;
+        return this.images.BUBBLE_ATTACK;
     }
 
     handleCinematicDeath() {
@@ -207,9 +207,9 @@ class Character extends MovableObject {
 
     getDeathImages() {
         if (this.lastDamageType === 'electro') {
-            return this.images.ELECTRODEAD;
+            return this.images.ELECTRO_DEAD;
         }
-        return this.images.POISENED;
+        return this.images.POISEN;
     }
 
     handleHurt() {
@@ -220,9 +220,9 @@ class Character extends MovableObject {
 
     getHurtImages() {
         if (this.lastDamageType === 'electro') {
-            return this.images.ELECTROHURT;
+            return this.images.ELECTRO_HURT;
         }
-        return this.images.POIHURT;
+        return this.images.POISEN_HURT;
     }
 
     handleMovement() {

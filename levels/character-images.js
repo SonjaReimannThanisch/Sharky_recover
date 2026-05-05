@@ -45,7 +45,7 @@ const CHARACTER_IMAGES = {
         'img/1.Sharkie/3.Swim/6.png'
     ],
 
-    POISENED : [
+    POISEN : [
         'img/1.Sharkie/6.dead/1.Poisoned/1.png',
         'img/1.Sharkie/6.dead/1.Poisoned/2.png',
         'img/1.Sharkie/6.dead/1.Poisoned/3.png',
@@ -60,20 +60,20 @@ const CHARACTER_IMAGES = {
         'img/1.Sharkie/6.dead/1.Poisoned/12.png',
     ],
 
-    POIHURT : [
+    POISEN_HURT : [
         'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
     ],
 
-    ELECTROHURT : [
+    ELECTRO_HURT : [
         'img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
         'img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
         'img/1.Sharkie/5.Hurt/2.Electric shock/3.png',
     ],
 
-    ELECTRODEAD : [
+    ELECTRO_DEAD : [
         'img/1.Sharkie/6.dead/2.Electro_shock/1.png',
         'img/1.Sharkie/6.dead/2.Electro_shock/2.png',
         'img/1.Sharkie/6.dead/2.Electro_shock/3.png',
@@ -87,7 +87,7 @@ const CHARACTER_IMAGES = {
      
     ],
 
-    BUBBLEATTACK : [
+    BUBBLE_ATTACK : [
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
@@ -98,7 +98,7 @@ const CHARACTER_IMAGES = {
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png',
     ],
 
-    FINSLAP : [
+    FIN_SLAP : [
         'img/1.Sharkie/4.Attack/Fin slap/1.png',
         'img/1.Sharkie/4.Attack/Fin slap/2.png',
         'img/1.Sharkie/4.Attack/Fin slap/3.png',
