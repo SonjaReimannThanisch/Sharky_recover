@@ -25,7 +25,7 @@ Just open index.html in your browser.
 - CSS
 
 ![Start Screen](img/startScreen.png)
-![Game Overview](img/StartGame.png.png)
+![Game Overview](img/StartGame.png)
 
 ## Note
 This project was developed for educational purposes as part of a programming course.
