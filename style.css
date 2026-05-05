@@ -240,6 +240,11 @@ canvas {
   width: 100%;
 }
 
+p {
+  color: aquamarine;
+  font-size: large;
+}
+
 .impressum-link {
   color: var(--color-link);
   opacity: 0.85;

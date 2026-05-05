@@ -17,10 +17,10 @@ function injectStartScreen() {
             🔊
           </button>
 
-          <a class="impressum-link" href="impressum.html">Impressum</a>
+          <a class="impressum-link" onclick="openImpressum()">Impressum</a>
         </div>
         <footer>
-          <p>WASD – Move | Space – Attack</p>
+          <p color="white">WASD – Move | Space – Attack</p>
         </footer>
       </div>
     </div>
@@ -146,14 +146,20 @@ function bindMobileControls(worldInstance) {
 function bindMobileButton(id, worldInstance, key) {
   let button = document.getElementById(id);
   if (!button) return;
-
   button.addEventListener('touchstart', event => {
     event.preventDefault();
     worldInstance.keyboard[key] = true;
   });
-
   button.addEventListener('touchend', event => {
     event.preventDefault();
     worldInstance.keyboard[key] = false;
   });
+}
+
+function openImpressum() {
+  document.getElementById('impressumOverlay')?.classList.remove('hidden');
+}
+
+function closeImpressum() {
+  document.getElementById('impressumOverlay')?.classList.add('hidden');
 }
