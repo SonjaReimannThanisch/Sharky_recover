@@ -24,9 +24,11 @@ Just open index.html in your browser.
 - HTML5 Canvas
 - CSS
 
-![Sharky Game]
-(img/startScreen.png)
-(img/GameOverview.png)
+![Start Screen](img/startScreen.png)
+![Game Overview](img/GameOverview.png)
+
+## Note
+This project was developed for educational purposes as part of a programming course.
 
 ## Author
 Sonja Reimann-Thanisch
