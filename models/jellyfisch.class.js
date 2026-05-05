@@ -13,7 +13,7 @@ class Jellyfisch extends MovableObject {
         bottom: 5,
     }
 
-    constructor(color = 'lila') {
+    constructor(color = 'lila', x = 890, y = 100) {
         super();
         this.images = window.JELLYFISH_IMAGES;
         this.type = color;
@@ -21,8 +21,8 @@ class Jellyfisch extends MovableObject {
         this.swimImages = this.getSwimImages();
         this.loadImage(this.swimImages[0]);
         this.loadAllImages();
-        this.x = 890 + Math.random() * 500;
-        this.y = 100 + Math.random() * 200;
+        this.x = x;
+        this.y = y;
         this.speed = 0.3 + Math.random() * 0.5;
         this.animate();
         this.damageType = 'electro';
@@ -84,9 +84,28 @@ class Jellyfisch extends MovableObject {
         setInterval(() => {
             if (!this.world?.hasStarted || !this.world?.hasPlayerMoved) return;
             if (!this.isDead) {
-                this.x -= this.speed;
+                this.move();
             }
         }, 1000 / 60);
+    }
+
+    move() {
+        let nextX = this.x - this.speed;
+        if (this.wouldHitBarrier(nextX)) {
+            this.speed *= -1;
+            return;
+        }
+        this.x = nextX;
+    }
+
+    wouldHitBarrier(nextX) {
+        let oldX = this.x;
+        this.x = nextX;
+        let hitsBarrier = this.world.level.barriers.some(barrier =>
+            this.isColliding(barrier)
+        );
+        this.x = oldX;
+        return hitsBarrier;
     }
 
     startAnimation() {

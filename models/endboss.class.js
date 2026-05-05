@@ -27,7 +27,6 @@ class Endboss extends MovableObject {
     }
 
     constructor(x, y) {
-    
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.images = window.ENDBOSS_IMAGES;
         this.x = this.finalX;

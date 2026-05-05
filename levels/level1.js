@@ -11,32 +11,18 @@ function createLevel1() {
 
 function createEnemies() {
     return [
-        new Pufferfisch('pink'),
-        new Pufferfisch('pink'),
-        new Pufferfisch('pink'),
-        new Pufferfisch('rose'),
-        new Pufferfisch('rose'),
-        new Pufferfisch('rose'),
-        new Pufferfisch('green'),
-        new Pufferfisch('green'),
-        new Pufferfisch('green'),
+        new Jellyfisch('lila', 900, 180),
+        new Jellyfisch('lila', 1200, 260),
 
-        new Jellyfisch('lila'),
-        new Jellyfisch('lila'),
-        new Jellyfisch('lila'),
-        new Jellyfisch('yellow'),
-        new Jellyfisch('yellow'),
-        new Jellyfisch('yellow'),
+        new Pufferfisch('pink', 1500, 220),
+        new Jellyfisch('yellow', 1800, 140),
 
-        new Jellyfisch('green'),
-        new Jellyfisch('green'),
-        new Jellyfisch('green'),
-        new Jellyfisch('green'),
+        new Pufferfisch('rose', 2300, 280),
+        new Jellyfisch('green', 2600, 160),
+        new Pufferfisch('green', 2950, 230),
 
-        new Jellyfisch('pink'),
-        new Jellyfisch('pink'),
-        new Jellyfisch('pink'),
-        new Jellyfisch('pink'),
+        new Jellyfisch('pink', 3300, 180),
+        new Pufferfisch('green', 3500, 260),
 
         new Endboss(),
     ];

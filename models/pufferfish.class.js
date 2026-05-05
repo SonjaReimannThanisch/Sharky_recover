@@ -18,16 +18,16 @@ class Pufferfisch extends MovableObject {
         bottom: 20,
     }
 
-    constructor(color = 'pink') {
+    constructor(color = 'pink', x = 1440, y = 140) {
         super()
         this.images = window.PUFFERFISH_IMAGES;
         this.type = color;
         this.swimImages = this.getSwimImages();
         this.loadImage(this.swimImages[0]);
         this.loadAllImages();
-        this.x = 1440 + Math.random() * 500;
-        this.y = 140 + Math.random() * 200;
-        this.speed = 0.6 + Math.random() * 0.7;
+        this.x = x;
+        this.y = y;
+        this.speed = 0.6 + Math.random() * 0.5;
         this.animate();
         this.damageType = 'poison';
     }
@@ -84,7 +84,27 @@ class Pufferfisch extends MovableObject {
     }
 
     move() {
-        this.x -= this.speed;
+        let nextX = this.x - this.speed;
+        if (this.wouldHitBarrier(nextX)) {
+            this.turnAround();
+            return;
+        }
+        this.x = nextX;
+    }
+
+    wouldHitBarrier(nextX) {
+        let oldX = this.x;
+        this.x = nextX;
+        let hitsBarrier = this.world.level.barriers.some(barrier =>
+            this.isColliding(barrier)
+        );
+        this.x = oldX;
+        return hitsBarrier;
+    }
+
+    turnAround() {
+        this.speed *= -1;
+        this.otherDirection = !this.otherDirection;
     }
 
     handleDeathMovement() {
