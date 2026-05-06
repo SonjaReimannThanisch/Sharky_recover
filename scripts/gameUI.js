@@ -3,8 +3,19 @@ function injectStartScreen() {
   let markup = `
     <div id="startscreen" class="overlay-start">
       <div class="start-wrap">
-        <img class="start-instructions" src="img/6.Botones/Instructions 2.png" alt="Instructions">
+        <div class="start-controls">
+          <div class="control-line move-line">
+            <img class="key-arrows" src="img/6.Botones/Key/arrow keys.png" alt="Arrow keys">
+            <img class="title-move" src="img/6.Botones/Tittles/Move title.png" alt="Move Shark">
+          </div>
 
+          <div class="control-line attack-line">
+            <img class="key-space" src="img/6.Botones/Key/Space Bar key.png" alt="Space Bar">
+            <img class="key-d" src="img/6.Botones/Key/D key.png" alt="D key">
+            <img class="title-attack" src="img/6.Botones/Tittles/Attack tittle.png" alt="Attack">
+          </div>
+        </div>
+ 
         <button id="btn-start" class="img-btn" aria-label="Start">
           <img src="img/6.Botones/Start/1.png" alt="Start">
         </button>
@@ -19,9 +30,6 @@ function injectStartScreen() {
 
           <a class="impressum-link" onclick="openImpressum()">Impressum</a>
         </div>
-        <footer>
-          <p color="white">WASD – Move | Space – Attack</p>
-        </footer>
       </div>
     </div>
   `;
@@ -93,7 +101,6 @@ function bindStartUi(worldInstance) {
 }
 
 function updateStartMuteButton(worldInstance) {
-  // worldInstance.sound.playSound('itemsSelect');
   let btn = document.getElementById('btn-mute-start');
   if (!btn) return;
   btn.textContent = worldInstance.sound.isMuted ? '🔇' : '🔊';

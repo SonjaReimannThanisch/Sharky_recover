@@ -319,7 +319,7 @@ class World {
     handleAttackInput(now) {
         if (!this.hasStarted || this.isGameOver) return;
         if (this.keyboard.SPACE) this.tryFinSlap(now);
-        if (this.keyboard.A) this.tryBubble(now);
+        if (this.keyboard.D) this.tryBubble(now);
     }
 
     tryFinSlap(now) {
@@ -331,7 +331,6 @@ class World {
         let attack = new FinSlapAttack(this.mainCharacter);
         this.attacks.push(attack);
         this.lastFinSlapAt = now;
-        this.keyboard.SPACE = false;
     }
 
     tryBubble(now) {
@@ -347,9 +346,7 @@ class World {
             if (this.isGameOver) return;
             this.attacks.push(new BubbleTrapAttack(this.mainCharacter, type));
         }, 500);
-
         this.lastBubbleAt = now;
-        this.keyboard.A = false;
     }
 
     addObjectsToMap(objects) {
