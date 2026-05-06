@@ -1,7 +1,7 @@
 class FinSlapAttack extends Attack {
 
-    width = 180;
-    height = 120;
+    width = 140;
+    height = 130;
     lifetime = 250;
     hasHit = false;
     isImpacting = false;
@@ -16,9 +16,9 @@ class FinSlapAttack extends Attack {
 
     updatePosition() {
         this.otherDirection = this.character.otherDirection;
-        let offsetX = this.character.otherDirection ? -50 : 50;
+        let offsetX = this.character.otherDirection ? -20 : 20;
         this.x = this.character.x + offsetX;
-        this.y = this.character.y + 120;
+        this.y = this.character.y + 100;
     }
 
     tick() {

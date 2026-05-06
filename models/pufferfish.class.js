@@ -12,10 +12,10 @@ class Pufferfisch extends MovableObject {
     deathGravity = 0.08;
 
     offset = {
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 20,
+        top: 4,
+        left: 4,
+        right: 4,
+        bottom: 4,
     }
 
     constructor(color = 'pink', x = 1440, y = 140) {

@@ -20,10 +20,10 @@ class Endboss extends MovableObject {
     damageType = 'poison';
 
     offset = {
-        top: 220,
-        left: 35,
-        right: 40,
-        bottom: 80,
+        top: 180,
+        left: 45,
+        right: 45,
+        bottom: 70,
     }
 
     constructor(x, y) {

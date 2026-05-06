@@ -7,6 +7,6 @@ class Collider extends DrawableObject {
     this.height = height;
   }
 
-  draw(ctx) {
-  }
+  // draw(ctx) {
+  // }
 }

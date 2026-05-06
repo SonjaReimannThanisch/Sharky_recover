@@ -1,11 +1,10 @@
-window.DEBUG = false;
+window.DEBUG = true;
 let canvas;
 let gameWorld;
 let keyboard = new Keyboard();
 
 function init() {
   injectStartScreen();
-
   canvas = document.getElementById('backgroundCanvas');
   keyboard = new Keyboard(canvas.width, canvas.height);
   gameWorld = new World(canvas, keyboard);

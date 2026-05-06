@@ -8,6 +8,11 @@ class Barriers extends MovableObject {
     this.width = width;
     this.height = height;
 
-    this.offset = { top: 20, left: 20, right: 20, bottom: 20 };
+    this.offset = {
+      top: 35,
+      left: 10,
+      right: 25,
+      bottom: 20,
+    };
   }
 }

@@ -26,10 +26,10 @@ class Character extends MovableObject {
     animationInterval = null;
 
     offset = {
-        top: 130,
-        left: 35,
-        right: 10,
-        bottom: 60,
+        top: 120,
+        left: 40,
+        right: 40,
+        bottom: 50,
     }
 
     constructor() {

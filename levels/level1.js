@@ -43,7 +43,6 @@ function createCoins() {
         new Coin(3340, 280),
         new Coin(3580, 340),
         new Coin(3660, 340),
-        // new Coin(3580, 280),
         new Coin(3760, 260),
         new Coin(3820, 230),
         new Coin(3880, 260),

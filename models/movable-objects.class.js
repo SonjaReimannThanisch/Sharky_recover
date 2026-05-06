@@ -9,8 +9,8 @@ class MovableObject extends DrawableObject {
         if (!window.DEBUG) return;
         if(this instanceof Character || this instanceof Pufferfisch || this instanceof Jellyfisch || this instanceof Endboss || this instanceof Barriers || this instanceof Attack) {
             ctx.beginPath();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = 'blue';
+            ctx.strokeStyle = 'deepskyblue';
+            ctx.lineWidth = 3;
             let offset = this.offset || { top: 0, left: 0, right: 0, bottom: 0 };
             ctx.rect(
             this.x + offset.left,

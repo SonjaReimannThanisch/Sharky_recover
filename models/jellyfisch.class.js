@@ -7,10 +7,10 @@ class Jellyfisch extends MovableObject {
     energy = 100;
 
     offset = {
-        top: 5,
-        left: 5,
-        right: 5,
-        bottom: 5,
+        top: 4,
+        left: 4,
+        right: 4,
+        bottom: 4,
     }
 
     constructor(color = 'lila', x = 890, y = 100) {
