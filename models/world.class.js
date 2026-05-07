@@ -338,19 +338,43 @@ class World {
     }
 
     tryBubble(now) {
-        if (now - this.lastBubbleAt < this.bubbleCooldowns) return;
-        let type = 'normal';
+        if (this.isBubbleOnCooldown(now)) return;
+        let type = this.getBubbleType();
+        if (!this.canUseBubble(type)) return;
+        this.useBubbleResource(type);
+        this.startBubbleAttack(type);
+        this.lastBubbleAt = now;
+    }
+
+    isBubbleOnCooldown(now) {
+        return now - this.lastBubbleAt < this.bubbleCooldowns;
+    }
+
+    getBubbleType() {
         let boss = this.getEndboss();
-        if (boss && boss.isActive) {
-            type = 'poison';
-        }
+        if (boss && boss.isActive) return 'poison';
+        return 'normal';
+    }
+
+    canUseBubble(type) {
+        if (type !== 'poison') return true;
+        return this.mainCharacter.bottle >= 20;
+    }
+
+    useBubbleResource(type) {
+        if (type !== 'poison') return;
+        this.mainCharacter.bottle -= 20;
+        this.statusPoison.setPercentage(this.mainCharacter.bottle);
+    }
+
+    startBubbleAttack(type) {
         this.sound.playSound('bubbleAttack');
         this.mainCharacter.startBubbleAttackAnimation(type);
+
         setTimeout(() => {
             if (this.isGameOver || this.hasWon) return;
             this.attacks.push(new BubbleTrapAttack(this.mainCharacter, type));
         }, 500);
-        this.lastBubbleAt = now;
     }
 
     addObjectsToMap(objects) {

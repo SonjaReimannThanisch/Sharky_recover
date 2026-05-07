@@ -13,6 +13,7 @@ function createEnemies() {
     return [
         new Jellyfisch('green', 500, 180),
         new Jellyfisch('yellow', 800, 260),
+        new Pufferfisch('rose', 640, 280),
 
         new Pufferfisch('pink', 1500, 220),
         new Jellyfisch('lila', 1800, 140),
@@ -23,6 +24,7 @@ function createEnemies() {
 
         new Jellyfisch('pink', 3300, 180),
         new Pufferfisch('green', 3500, 260),
+        new Pufferfisch('pink', 3660, 220),
 
         new Endboss(),
     ];
@@ -30,32 +32,37 @@ function createEnemies() {
 
 function createCoins() {
     return [
-        new Coin(260, 320),
-        new Coin(340, 260),
-        new Coin(420, 320),
+        new Coin(900, 260),
+        new Coin(980, 220),
+        new Coin(1060, 260),
+
         new Coin(1500, 300),
         new Coin(1580, 240),
         new Coin(1660, 210),
         new Coin(1740, 240),
         new Coin(1820, 300),
+
+        new Coin(2440, 160),
+        new Coin(2520, 130),
+        new Coin(2600, 160),
+
         new Coin(3180, 220),
         new Coin(3260, 250),
         new Coin(3340, 280),
-        new Coin(3580, 340),
-        new Coin(3660, 340),
-        new Coin(3760, 260),
+
+        new Coin(3660, 320),
+        new Coin(3740, 260),
         new Coin(3820, 230),
-        new Coin(3880, 260),
     ];
 }
 
 function createPoison() {
     return [
-        new Poison(760, 340),
-        new Poison(1380, 340),
-        new Poison(2100, 320),
-        new Poison(3220, 330),
-        new Poison(3680, 330),
+        new Poison(1180, 340),
+        new Poison(1900, 330),
+        new Poison(2740, 320),
+        new Poison(3420, 330),
+        new Poison(3720, 330),
     ];
 }
 
