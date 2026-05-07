@@ -81,11 +81,16 @@ class Character extends MovableObject {
     }
 
     handleMovementInput() {
+        if (this.shouldStopMovement()) return;
         this.moveRight();
         this.moveLeft();
         this.moveUp();
         this.moveDown();
         this.updateCamera();
+    }
+
+    shouldStopMovement() {
+        return !this.world || this.world.isGameOver || this.world.hasWon || this.isDead() || this.isCinematicDead;
     }
 
     updateCamera() {

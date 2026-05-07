@@ -162,7 +162,7 @@ class World {
     }
 
     isRunningGame() {
-        return this.hasStarted && !this.isGameOver;
+        return this.hasStarted && !this.isGameOver && !this.hasWon;
     }
 
     setWorldForLevelObjects() {
@@ -179,7 +179,9 @@ class World {
 
     beginFrame() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.camera_x = Math.min(0, -this.mainCharacter.x);
+        if (this.isRunningGame() && !this.hasWon) {
+            this.camera_x = Math.min(0, -this.mainCharacter.x);
+        }
     }
 
     updateWorldState() {
@@ -343,7 +345,7 @@ class World {
         this.sound.playSound('bubbleAttack');
         this.mainCharacter.startBubbleAttackAnimation(type);
         setTimeout(() => {
-            if (this.isGameOver) return;
+            if (this.isGameOver || this.hasWon) return;
             this.attacks.push(new BubbleTrapAttack(this.mainCharacter, type));
         }, 500);
         this.lastBubbleAt = now;
