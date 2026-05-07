@@ -1,3 +1,6 @@
+/**
+ * Image paths used for Sharkie's character animations.
+ */
 const CHARACTER_IMAGES = {
 
     IDLE : [

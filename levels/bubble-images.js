@@ -1,3 +1,6 @@
+/**
+ * Image paths used for the Bubbles animations.
+ */
 const BUBBLE_IMAGES = {
     NORMAL : [
         'img/1.Sharkie/4.Attack/Bubble trap/Bubble.png',

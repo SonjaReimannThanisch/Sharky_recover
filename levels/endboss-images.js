@@ -1,3 +1,6 @@
+/**
+ * Image paths used for the endboss animations.
+ */
 const ENDBOSS_IMAGES = {
     INTRO : [
         'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',

@@ -1,3 +1,6 @@
+/**
+ * Image paths used for jellyfish movement and death animations.
+ */
 const JELLYFISH_IMAGES = {
     MOVE_LILA : [
         'img/2.Enemy/2 Jelly fish/Regular damage/Lila2.png',

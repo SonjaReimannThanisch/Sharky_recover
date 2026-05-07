@@ -1,3 +1,7 @@
+/**
+ * Creates the first game level with enemies, collectibles, background and barriers.
+ * @returns {Level} The configured level instance.
+ */
 function createLevel1() {
     return new Level(
         createEnemies(),
@@ -9,6 +13,10 @@ function createLevel1() {
     );
 }
 
+/**
+ * Creates all enemies for the first level.
+ * @returns {Array<MovableObject>} The enemy objects.
+ */
 function createEnemies() {
     return [
         new Jellyfisch('green', 500, 180),
@@ -30,6 +38,10 @@ function createEnemies() {
     ];
 }
 
+/**
+ * Creates all coins for the first level.
+ * @returns {Array<Coin>} The coin objects.
+ */
 function createCoins() {
     return [
         new Coin(1500, 300),
@@ -52,6 +64,10 @@ function createCoins() {
     ];
 }
 
+/**
+ * Creates all poison bottles for the first level.
+ * @returns {Array<Poison>} The poison bottle objects.
+ */
 function createPoison() {
     return [
         new Poison(45, 315),
@@ -65,6 +81,10 @@ function createPoison() {
     ];
 }
 
+/**
+ * Creates all animated background light objects.
+ * @returns {Array<Light>} The light objects.
+ */
 function createLights() {
     return [
         new Light('img/3.Background/Layers/1.Light/1.png', 0),
@@ -72,6 +92,10 @@ function createLights() {
     ];
 }
 
+/**
+ * Creates the repeating background layers for the level.
+ * @returns {Array<BackgroundObject>} The background objects.
+ */
 function createBackground() {
     return [
         new BackgroundObject('img/3.Background/Layers/5.Water/D1.png', 0),
@@ -85,6 +109,10 @@ function createBackground() {
     ];
 }
 
+/**
+ * Creates all barrier objects and collision areas for the level.
+ * @returns {Array<Barriers>} The barrier objects.
+ */
 function createBarriers() {
     let barrierTwo = new Barriers('img/3.Background/Barrier/2.png', 950, 150, 420, 320);
     barrierTwo.offset = { top: 45, left: 50, right: 40, bottom: 0 };
@@ -95,6 +123,10 @@ function createBarriers() {
     ];
 }
 
+/**
+ * Creates the cave barrier setup with decorative and collision layers.
+ * @returns {Array<Barriers>} The cave barrier objects.
+ */
 function createCaveBarrier() {
     let caveDeco = new Barriers('img/3.Background/Barrier/1.png', 2300, 0, 850, 480);
     caveDeco.offset = { top: 9999, left: 9999, right: 9999, bottom: 9999 };

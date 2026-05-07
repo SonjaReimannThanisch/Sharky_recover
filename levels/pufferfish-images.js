@@ -1,3 +1,6 @@
+/**
+ * Image paths used for pufferfish movement and death animations.
+ */
 const PUFFERFISH_IMAGES = {
     IMAGE_PINK : [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png',
