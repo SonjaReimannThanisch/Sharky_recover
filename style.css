@@ -180,8 +180,7 @@ p { color: var(--color-text-soft); font-size: large; }
 #fullscreen:fullscreen {
   width: 100vw;
   height: 100vh;
-  background: black;
-  display: flex;
+  background: var(--bg-water) center / cover no-repeat;
 }
 
 #fullscreen:fullscreen canvas {
@@ -189,6 +188,15 @@ p { color: var(--color-text-soft); font-size: large; }
   height: 100%;
   max-width: none;
   aspect-ratio: auto;
+}
+
+#fullscreen:fullscreen .overlay-start {
+  background: var(--bg-water) center / cover no-repeat;
+}
+
+#fullscreen:fullscreen .start-wrap {
+  width: min(90vw, 720px);
+  height: 480px;
 }
 
 .mobile-controls {
