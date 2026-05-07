@@ -1,5 +1,7 @@
+/**
+ * Represents the playable Sharky character with movement, combat and animation logic.
+ */
 class Character extends MovableObject {
-
     height = 280;
     width = 200;
     y = 80;
@@ -24,7 +26,6 @@ class Character extends MovableObject {
     isCinematicDead = false;
     movementInterval = null;
     animationInterval = null;
-
     offset = {
         top: 120,
         left: 40,
@@ -32,12 +33,18 @@ class Character extends MovableObject {
         bottom: 50,
     }
 
+    /**
+     * Creates the main character and loads all animation assets.
+     */
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.images = window.CHARACTER_IMAGES;
         this.loadAllImages();
     }
 
+    /**
+     * Loads all character animation images into the cache.
+     */
     loadAllImages() {
         this.loadImages(this.images.IDLE);
         this.loadImages(this.images.LONG_IDLE);
@@ -53,12 +60,18 @@ class Character extends MovableObject {
         this.loadImages(this.images.DEAD_CINEMATIC);
     }
 
+    /**
+     * Starts movement and animation loops for the character.
+     */
     animate() {
         this.setMaxY();
         this.startMovementLoop();
         this.startAnimationLoop();
     }
 
+    /**
+     * Calculates the maximum vertical movement position.
+     */
     setMaxY() {
         if (!this.world) return;
         let o = this.offset || { top: 0, left: 0, right: 0, bottom: 0 };
@@ -66,6 +79,9 @@ class Character extends MovableObject {
         this.maxY = this.world.canvas.height - hitboxHeight - o.top;
     }
 
+    /**
+     * Starts the continuous movement input loop.
+     */
     startMovementLoop() {
         if (this.movementInterval) return;
         this.movementInterval = setInterval(() => {
@@ -73,6 +89,9 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * Starts the continuous animation update loop.
+     */
     startAnimationLoop() {
         if (this.animationInterval) return;
         this.animationInterval = setInterval(() => {
@@ -80,6 +99,9 @@ class Character extends MovableObject {
         }, 80);
     }
 
+    /**
+     * Processes movement input and updates the camera position.
+     */
     handleMovementInput() {
         if (this.shouldStopMovement()) return;
         this.moveRight();
@@ -89,14 +111,24 @@ class Character extends MovableObject {
         this.updateCamera();
     }
 
+    /**
+     * Checks whether movement should be disabled.
+     * @returns {boolean}
+     */
     shouldStopMovement() {
         return !this.world || this.world.isGameOver || this.world.hasWon || this.isDead() || this.isCinematicDead;
     }
 
+    /**
+     * Updates the world camera position based on character movement.
+     */
     updateCamera() {
         this.world.camera_x = -this.x;
     }
 
+    /**
+     * Moves the character to the right.
+     */
     moveRight() {
         if (!this.world.keyboard.RIGHT) return;
         if (this.x >= this.world.level.level_end_x) return;
@@ -106,6 +138,9 @@ class Character extends MovableObject {
         this.lastActionTime = Date.now();
     }
 
+    /**
+     * Moves the character to the left.
+     */
     moveLeft() {
         if (!this.world.keyboard.LEFT) return;
         if (this.x <= 0) return;
@@ -115,6 +150,9 @@ class Character extends MovableObject {
         this.lastActionTime = Date.now();
     }
 
+    /**
+     * Moves the character upward.
+     */
     moveUp() {
         if (!this.world.keyboard.UP) return;
         if (this.y <= this.minY) return;
@@ -123,6 +161,9 @@ class Character extends MovableObject {
         this.lastActionTime = Date.now();
     }
 
+    /**
+     * Moves the character downward.
+     */
     moveDown() {
         if (!this.world.keyboard.DOWN) return;
         if (this.y >= this.maxY) return;
@@ -131,6 +172,9 @@ class Character extends MovableObject {
         this.lastActionTime = Date.now();
     }
 
+    /**
+     * Handles the current character animation state.
+     */
     handleAnimations() {
         let now = Date.now();
         if (this.handleFinSlap(now)) return;
@@ -142,6 +186,9 @@ class Character extends MovableObject {
         this.handleIdle();
     }
 
+    /**
+     * Stops all active movement and animation loops.
+     */
     stopAnimationLoops() {
         if (this.movementInterval) {
             clearInterval(this.movementInterval);
@@ -153,6 +200,11 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Handles the fin slap attack animation state.
+     * @param {number} now
+     * @returns {boolean}
+     */
     handleFinSlap(now) {
         if (!this.isFinSlapAttacking) return false;
         this.playAnimation(this.images.FIN_SLAP);
@@ -162,12 +214,22 @@ class Character extends MovableObject {
         return true;
     }
 
+    /**
+     * Handles bubble attack animation states.
+     * @param {number} now
+     * @returns {boolean}
+     */
     handleBubble(now) {
         if (this.handleChargingBubble(now)) return true;
         if (this.handleActiveBubble(now)) return true;
         return false;
     }
     
+    /**
+     * Handles the bubble charging animation phase.
+     * @param {number} now
+     * @returns {boolean}
+     */
     handleChargingBubble(now) {
         if (!this.isChargingBubble) return false;
         this.playAnimation(this.images.WHALE_ATTACK);
@@ -177,12 +239,21 @@ class Character extends MovableObject {
         return true;
     }
 
+    /**
+     * Starts the active bubble attack phase.
+     * @param {number} now
+     */
     startBubbleAttack(now) {
         this.isChargingBubble = false;
         this.isBubbleAttacking = true;
         this.bubbleAttackStartedAt = now;
     }
 
+    /**
+     * Handles the active bubble attack animation.
+     * @param {number} now
+     * @returns {boolean}
+     */
     handleActiveBubble(now) {
         if (!this.isBubbleAttacking) return false;
         this.playAnimation(this.getBubbleAttackImages());
@@ -192,6 +263,10 @@ class Character extends MovableObject {
         return true;
     }
 
+    /**
+     * Gets the correct bubble attack animation images.
+     * @returns {string[]}
+     */
     getBubbleAttackImages() {
         if (this.bubbleAttackType === 'poison') {
             return this.images.WHALE_ATTACK_BUBBLE;
@@ -199,18 +274,30 @@ class Character extends MovableObject {
         return this.images.BUBBLE_ATTACK;
     }
 
+    /**
+     * Handles the cinematic death animation state.
+     * @returns {boolean}
+     */
     handleCinematicDeath() {
         if (!this.isCinematicDead) return false;
         this.playAnimation(this.images.DEAD_CINEMATIC);
         return true;
     }
 
+    /**
+     * Handles the standard death animation state.
+     * @returns {boolean}
+     */
     handleDeath() {
         if (!this.isDead()) return false;
         this.playAnimation(this.getDeathImages());
         return true;
     }
 
+    /**
+     * Gets the correct death animation images.
+     * @returns {string[]}
+     */
     getDeathImages() {
         if (this.lastDamageType === 'electro') {
             return this.images.ELECTRO_DEAD;
@@ -218,12 +305,20 @@ class Character extends MovableObject {
         return this.images.POISEN;
     }
 
+    /**
+     * Handles the hurt animation state.
+     * @returns {boolean}
+     */
     handleHurt() {
         if (!this.isHurt()) return false;
         this.playAnimation(this.getHurtImages());
         return true;
     }
 
+    /**
+     * Gets the correct hurt animation images.
+     * @returns {string[]}
+     */
     getHurtImages() {
         if (this.lastDamageType === 'electro') {
             return this.images.ELECTRO_HURT;
@@ -231,6 +326,10 @@ class Character extends MovableObject {
         return this.images.POISEN_HURT;
     }
 
+    /**
+     * Handles swimming movement animations and sounds.
+     * @returns {boolean}
+     */
     handleMovement() {
         if (!this.isMoving()) return false;
         this.stopSleepSound();
@@ -239,6 +338,10 @@ class Character extends MovableObject {
         return true;
     }
 
+    /**
+     * Checks whether movement input is active.
+     * @returns {boolean}
+     */
     isMoving() {
         return this.world.keyboard.RIGHT ||
             this.world.keyboard.LEFT ||
@@ -246,16 +349,26 @@ class Character extends MovableObject {
             this.world.keyboard.DOWN;
     }
 
+    /**
+     * Stops the sleep sound effect.
+     */
     stopSleepSound() {
         if (!this.isSleepingSoundPlaying) return;
         this.world.sound.stopSound('sleep');
         this.isSleepingSoundPlaying = false;
     }
 
+    /**
+     * Checks whether the character entered sleep mode.
+     * @returns {boolean}
+     */
     isSleeping() {
         return Date.now() - this.lastActionTime > 10000;
     }
 
+    /**
+     * Plays the swim sound effect.
+     */
     playSwimSound() {
         if (this.isSwimmingSoundPlaying) return;
         this.world.sound.playSound('swim');
@@ -265,6 +378,9 @@ class Character extends MovableObject {
         }, 200);
     }
 
+    /**
+     * Handles idle and sleep animations.
+     */
     handleIdle() {
         if (!this.canIdle()) {
             this.stopSleepSound();
@@ -277,14 +393,25 @@ class Character extends MovableObject {
         this.playIdleAnimation();
     }
 
+    /**
+     * Checks whether the character can enter idle state.
+     * @returns {boolean}
+     */
     canIdle() {
         return this.world || !this.world.hasStarted || this.world.isGameOver;
     }
 
+    /**
+     * Checks whether the boss fight idle animation should play.
+     * @returns {boolean}
+     */
     idleDuringBossFight() {
         return this.world && this.world.bossFightStarted && !this.isDead();
     }
 
+    /**
+     * Plays idle or sleep animations depending on inactivity.
+     */
     playIdleAnimation() {
         if (this.isSleeping() && this.world.hasPlayerMoved) {
             this.playAnimation(this.images.LONG_IDLE);
@@ -295,16 +422,27 @@ class Character extends MovableObject {
         this.playAnimation(this.images.IDLE);
     }
 
+    /**
+     * Plays the sleep sound effect.
+     */
     playSleepSound() {
         if (this.isSleepingSoundPlaying) return;
         this.world.sound.playSound('sleep');
         this.isSleepingSoundPlaying = true;
     }
 
+    /**
+     * Sets the current damage type for hurt and death animations.
+     * @param {string} type
+     */
     setDamageType(type) {
         this.lastDamageType = type;
     }
 
+    /**
+     * Starts the bubble attack animation sequence.
+     * @param {string} type
+     */
     startBubbleAttackAnimation(type = 'normal') {
         this.lastActionTime = Date.now();
         this.isChargingBubble = true;
@@ -314,6 +452,9 @@ class Character extends MovableObject {
         this.currentImage = 0;
     }
 
+    /**
+     * Starts the fin slap attack animation sequence.
+     */
     startFinSlapAttackAnimation() {
         this.lastActionTime = Date.now();
         if (this.isFinSlapAttacking) return;
