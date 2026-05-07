@@ -27,25 +27,16 @@ class WorldUiManager {
     }
 
     bindUi() {
-        let restartBtn = document.getElementById('btn-restart');
-        if (restartBtn) {
-            restartBtn.onclick = () => this.world.restartGame();
-        }
-        let homeBtn  = document.getElementById('btn-home');
-        if (homeBtn ) {
-            homeBtn .onclick = () => this.world.goHome();
-        }
-        let winRestartBtn = document.getElementById('btn-win-restart');
+        this.bindButton('btn-restart', () => this.world.restartGame());
+        this.bindButton('btn-home', () => this.world.goHome());
+        this.bindButton('btn-win-restart', () => this.world.restartGame());
+        this.bindButton('btn-win-home', () => this.world.goHome());
+    }
 
-        if (winRestartBtn) {
-            winRestartBtn.onclick = () => this.world.restartGame();
-        }
-
-        let winHomeBtn = document.getElementById('btn-win-home');
-
-        if (winHomeBtn) {
-            winHomeBtn.onclick = () => this.world.goHome();
-        }
+    bindButton(id, action) {
+        let button = document.getElementById(id);
+        if (!button) return;
+        button.onclick = action;
     }
 
     drawHudWonLayer() {
