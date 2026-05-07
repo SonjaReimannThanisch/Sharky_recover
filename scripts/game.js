@@ -3,6 +3,9 @@ let canvas;
 let gameWorld;
 let keyboard = new Keyboard();
 
+/**
+ * Initializes the game, UI systems and input bindings.
+ */
 function init() {
   injectStartScreen();
   canvas = document.getElementById('backgroundCanvas');
@@ -18,6 +21,9 @@ function init() {
   setupAudioUnlock();
 }
 
+/**
+ * Unlocks browser audio playback after first user interaction.
+ */
 function setupAudioUnlock() {
   const unlock = () => {
     if (gameWorld.sound && !gameWorld.sound.isMuted && !gameWorld.hasStarted) {

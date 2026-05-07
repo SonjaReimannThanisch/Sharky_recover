@@ -1,3 +1,6 @@
+/**
+ * Injects the start screen overlay into the game container.
+ */
 function injectStartScreen() {
   if (document.getElementById('startscreen')) return;
   let markup = `
@@ -37,6 +40,9 @@ function injectStartScreen() {
   document.getElementById('fullscreen').insertAdjacentHTML('beforeend', markup);
 }
 
+/**
+ * Injects mobile touch controls for touchscreen devices.
+ */
 function injectMobileControls() {
   if (document.getElementById('mobile-controls')) return;
 
@@ -61,6 +67,9 @@ function injectMobileControls() {
   document.getElementById('fullscreen')?.insertAdjacentHTML('beforeend', markup);
 }
 
+/**
+ * Injects the in-game HUD controls.
+ */
 function injectGameHud() {
   if (document.getElementById('btn-mute')) return;
 
@@ -72,32 +81,66 @@ function injectGameHud() {
   document.getElementById('fullscreen')?.insertAdjacentHTML('beforeend', markup);
 }
 
+/**
+ * Starts the game from the start screen.
+ * @param {World} worldInstance
+ */
 function startFromStartscreen(worldInstance) {
   document.getElementById('startscreen')?.classList.add('hidden');
   worldInstance.startGame();
 }
 
+/**
+ * Binds all start screen UI interactions.
+ * @param {World} worldInstance
+ */
 function bindStartUi(worldInstance) {
+  bindStartButton(worldInstance);
+  bindFullscreenButton(worldInstance);
+  bindStartMuteButton(worldInstance);
+}
+
+/**
+ * Binds the start button interaction.
+ */
+function bindStartButton(worldInstance) {
   document.getElementById('btn-start')?.addEventListener('click', () => {
     worldInstance.sound.playSound('itemsSelect');
-    updateStartMuteButton(worldInstance)
-    updateMuteButton(worldInstance)
+    updateStartMuteButton(worldInstance);
+    updateMuteButton(worldInstance);
     startFromStartscreen(worldInstance);
   });
+}
 
-  document.getElementById('btn-fullscreen')?.addEventListener('click', async () => {
+/**
+ * Binds the fullscreen button interaction.
+ */
+function bindFullscreenButton(worldInstance) {
+  document.getElementById('btn-fullscreen')?.addEventListener('click', () => {
     worldInstance.sound.playSound('itemsSelect');
-    let screen = document.getElementById('fullscreen');
-    if (!screen) return;
-    if (!document.fullscreenElement) enterFullscreen(screen);
-    else exitFullscreen();
+    toggleFullscreen();
   });
+}
 
+/**
+ * Binds the start screen mute button interaction.
+ */
+function bindStartMuteButton(worldInstance) {
   document.getElementById('btn-mute-start')?.addEventListener('click', () => {
     worldInstance.sound.playSound('itemsSelect');
     worldInstance.sound.toggleMusic();
     updateStartMuteButton(worldInstance);
   });
+}
+
+/**
+ * Toggles fullscreen mode for the game container.
+ */
+function toggleFullscreen() {
+  let screen = document.getElementById('fullscreen');
+  if (!screen) return;
+  if (!document.fullscreenElement) enterFullscreen(screen);
+  else exitFullscreen();
 }
 
 function updateStartMuteButton(worldInstance) {
@@ -124,6 +167,10 @@ function exitFullscreen() {
   }
 }
 
+/**
+ * Binds the in-game HUD button interactions.
+ * @param {World} worldInstance
+ */
 function bindGameHudUi(worldInstance) {
   document.getElementById('btn-mute')?.addEventListener('click', () => {
     worldInstance.sound.playSound('itemsSelect');
@@ -132,24 +179,34 @@ function bindGameHudUi(worldInstance) {
   });
 }
 
-function updateMuteButton(worldInstance) {;
+function updateMuteButton(worldInstance) {
   let btn = document.getElementById('btn-mute');
   if (!btn) return;
   btn.textContent = worldInstance.sound.isMuted ? '🔇' : '🔊';
 }
 
+/**
+ * Binds all mobile control buttons to keyboard input states.
+ * @param {World} worldInstance
+ */
 function bindMobileControls(worldInstance) {
   bindMobileButton('mobile-left', worldInstance, 'LEFT');
   bindMobileButton('mobile-right', worldInstance, 'RIGHT');
   bindMobileButton('mobile-up', worldInstance, 'UP');
   bindMobileButton('mobile-down', worldInstance, 'DOWN');
   bindMobileButton('mobile-fin', worldInstance, 'SPACE');
-  bindMobileButton('mobile-bubble', worldInstance, 'A');
+  bindMobileButton('mobile-bubble', worldInstance, 'D');
 
   document.getElementById('mobile-controls')
     ?.addEventListener('contextmenu', event => event.preventDefault());
 }
 
+/**
+ * Binds a mobile button to a keyboard control state.
+ * @param {string} id
+ * @param {World} worldInstance
+ * @param {string} key
+ */
 function bindMobileButton(id, worldInstance, key) {
   let button = document.getElementById(id);
   if (!button) return;
@@ -163,10 +220,16 @@ function bindMobileButton(id, worldInstance, key) {
   });
 }
 
+/**
+ * Opens the impressum overlay.
+ */
 function openImpressum() {
   document.getElementById('impressumOverlay')?.classList.remove('hidden');
 }
 
+/**
+ * Closes the impressum overlay.
+ */
 function closeImpressum() {
   document.getElementById('impressumOverlay')?.classList.add('hidden');
 }
