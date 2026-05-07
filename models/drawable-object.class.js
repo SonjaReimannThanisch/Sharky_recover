@@ -1,3 +1,7 @@
+
+/**
+ * Base class for drawable game objects with image loading and animation support.
+ */
 class DrawableObject {
     x = 10;
     y = 280;
@@ -7,16 +11,28 @@ class DrawableObject {
     currentImage = 0
     imageCache = {};
 
-loadImage(path) {
-    this.img = new Image();
-    this.img.src = path;
-}
+    /**
+     * Loads a single image for the object.
+     * @param {string} path
+     */
+    loadImage(path) {
+        this.img = new Image();
+        this.img.src = path;
+    }
 
+    /**
+     * Draws the object on the canvas.
+     * @param {CanvasRenderingContext2D} ctx
+     */
     draw(ctx) {
         if (!this.img) return;
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
+    /**
+     * Preloads multiple animation images into the image cache.
+     * @param {string[]} arr
+     */
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -25,6 +41,10 @@ loadImage(path) {
         });
     }
 
+    /**
+     * Plays the next frame of an animation sequence.
+     * @param {string[]} images
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
