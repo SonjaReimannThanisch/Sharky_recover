@@ -32,10 +32,6 @@ function createEnemies() {
 
 function createCoins() {
     return [
-        new Coin(900, 260),
-        new Coin(980, 220),
-        new Coin(1060, 260),
-
         new Coin(1500, 300),
         new Coin(1580, 240),
         new Coin(1660, 210),
@@ -58,11 +54,14 @@ function createCoins() {
 
 function createPoison() {
     return [
-        new Poison(1180, 340),
+        new Poison(45, 315),
+        new Poison(900, 340),
         new Poison(1900, 330),
         new Poison(2740, 320),
         new Poison(3420, 330),
-        new Poison(3720, 330),
+        new Poison(3620, 370),
+        new Poison(4200, 330),
+        new Poison(5000, 330),
     ];
 }
 
