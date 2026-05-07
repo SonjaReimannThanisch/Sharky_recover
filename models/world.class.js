@@ -97,11 +97,10 @@ class World {
         this.reduceCharacterEnergy(amount);
         this.statusLife.setPercentage(this.mainCharacter.energy);
         if (this.mainCharacter.energy <= 0) {
-        this.triggerGameOverIfDead();
-        return;
+            this.triggerGameOverIfDead();
+            return;
         }
         this.playDamageSound(type);
-        // this.triggerGameOverIfDead();
     }
 
     playDamageSound(type) {
@@ -117,11 +116,10 @@ class World {
     }
 
     reduceCharacterEnergy(amount) {
-        this.mainCharacter.energy -= amount;
-        if (this.mainCharacter.energy < 0) {
-            this.mainCharacter.energy = 0;
-            return;
-        }
+        this.mainCharacter.energy = Math.max(
+            0,
+            this.mainCharacter.energy - amount
+        );
         this.mainCharacter.lastHit = new Date().getTime();
     }
 

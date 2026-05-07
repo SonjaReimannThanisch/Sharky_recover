@@ -25,7 +25,7 @@ class WorldCollisionManager {
         ) {
             let cause = enemy instanceof Endboss ? 'boss' : '';
             this.world.applyDamage(
-                enemy.damage || 5,
+                enemy.damage || 10,
                 enemy.damageType || 'poison',
                 cause
             );
@@ -70,7 +70,7 @@ class WorldCollisionManager {
             this.world.isPressingIntoBarrier() &&
             !this.world.mainCharacter.isHurt()
         ) {
-            this.world.applyDamage(5, 'barrier');
+            this.world.applyDamage(20, 'barrier');
         }
     }
 
