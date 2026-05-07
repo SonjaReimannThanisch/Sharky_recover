@@ -217,7 +217,7 @@ class World {
 
     updateCombat(now) {
         this.combat.update(now);
-        this.handleAttackInput(now);
+        this.combat.handleAttackInput(now);
     }
 
     drawWorldLayer() {
@@ -316,63 +316,6 @@ class World {
             this.sound.stopAllSounds();
             this.sound.playSound('winning');
         }
-    }
-
-    handleAttackInput(now) {
-        if (!this.hasStarted || this.isGameOver) return;
-        if (this.keyboard.SPACE) this.tryFinSlap(now);
-        if (this.keyboard.D) this.tryBubble(now);
-    }
-
-    tryFinSlap(now) {
-        if (now - this.lastFinSlapAt < this.finSlapCooldowns ) return;
-        let activeFinSlap = this.attacks.some(a => a instanceof FinSlapAttack);
-        if (activeFinSlap) return;
-        this.mainCharacter.startFinSlapAttackAnimation();
-        this.sound.playSound('finSlapAttack');
-        let attack = new FinSlapAttack(this.mainCharacter);
-        this.attacks.push(attack);
-        this.lastFinSlapAt = now;
-    }
-
-    tryBubble(now) {
-        if (this.isBubbleOnCooldown(now)) return;
-        let type = this.getBubbleType();
-        if (!this.canUseBubble(type)) return;
-        this.useBubbleResource(type);
-        this.startBubbleAttack(type);
-        this.lastBubbleAt = now;
-    }
-
-    isBubbleOnCooldown(now) {
-        return now - this.lastBubbleAt < this.bubbleCooldowns;
-    }
-
-    getBubbleType() {
-        let boss = this.getEndboss();
-        if (boss && boss.isActive) return 'poison';
-        return 'normal';
-    }
-
-    canUseBubble(type) {
-        if (type !== 'poison') return true;
-        return this.mainCharacter.bottle >= 20;
-    }
-
-    useBubbleResource(type) {
-        if (type !== 'poison') return;
-        this.mainCharacter.bottle -= 20;
-        this.statusPoison.setPercentage(this.mainCharacter.bottle);
-    }
-
-    startBubbleAttack(type) {
-        this.sound.playSound('bubbleAttack');
-        this.mainCharacter.startBubbleAttackAnimation(type);
-
-        setTimeout(() => {
-            if (this.isGameOver || this.hasWon) return;
-            this.attacks.push(new BubbleTrapAttack(this.mainCharacter, type));
-        }, 500);
     }
 
     addObjectsToMap(objects) {

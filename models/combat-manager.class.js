@@ -76,4 +76,72 @@ class CombatWorld {
             attack => !attack.isExpired() && !attack.markedForDeletion
         );
     }
+
+    handleAttackInput(now) {
+        if (!this.world.hasStarted || this.world.isGameOver) return;
+        if (this.world.keyboard.SPACE) this.tryFinSlap(now);
+        if (this.world.keyboard.D) this.tryBubble(now);
+    }
+
+    tryFinSlap(now) {
+        if (now - this.world.lastFinSlapAt < this.world.finSlapCooldowns) return;
+        if (this.hasActiveFinSlap()) return;
+        this.startFinSlap(now);
+    }
+
+    hasActiveFinSlap() {
+        return this.world.attacks.some(a => a instanceof FinSlapAttack);
+    }
+
+    startFinSlap(now) {
+        this.world.mainCharacter.startFinSlapAttackAnimation();
+        this.world.sound.playSound('finSlapAttack');
+        this.world.attacks.push(new FinSlapAttack(this.world.mainCharacter));
+        this.world.lastFinSlapAt = now;
+    }
+
+    tryBubble(now) {
+        if (this.isBubbleOnCooldown(now)) return;
+        let type = this.getBubbleType();
+        if (!this.canUseBubble(type)) return;
+        this.useBubbleResource(type);
+        this.startBubbleAttack(type);
+        this.world.lastBubbleAt = now;
+    }
+
+    isBubbleOnCooldown(now) {
+        return now - this.world.lastBubbleAt < this.world.bubbleCooldowns;
+    }
+
+    getBubbleType() {
+        let boss = this.world.getEndboss();
+        if (boss && boss.isActive) return 'poison';
+        return 'normal';
+    }
+
+    canUseBubble(type) {
+        if (type !== 'poison') return true;
+        return this.world.mainCharacter.bottle >= 20;
+    }
+
+    useBubbleResource(type) {
+        if (type !== 'poison') return;
+        this.world.mainCharacter.bottle -= 20;
+        this.world.statusPoison.setPercentage(this.world.mainCharacter.bottle);
+    }
+
+    startBubbleAttack(type) {
+        this.world.sound.playSound('bubbleAttack');
+        this.world.mainCharacter.startBubbleAttackAnimation(type);
+        this.spawnBubbleDelayed(type);
+    }
+
+    spawnBubbleDelayed(type) {
+        setTimeout(() => {
+            if (this.world.isGameOver || this.world.hasWon) return;
+            this.world.attacks.push(
+                new BubbleTrapAttack(this.world.mainCharacter, type)
+            );
+        }, 500);
+    }
 }
