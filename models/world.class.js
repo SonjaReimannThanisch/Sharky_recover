@@ -248,6 +248,7 @@ class World {
 
     restartGame() {
         this.ui.hideGameOver();
+        this.ui.hideWinScreen();
         this.resetWorldState();
         this.hasStarted = true;
         this.sound.stopAllMusic();
@@ -312,6 +313,7 @@ class World {
         boss.update();
         if (boss.isDead && !this.hasWon) {
             this.hasWon = true;
+            this.ui.showWinScreen();
             this.sound.stopAllMusic();
             this.sound.stopAllSounds();
             this.sound.playSound('winning');
@@ -381,6 +383,7 @@ class World {
         this.sound.stopAllMusic();
         this.sound.playMenu();
         this.ui.hideGameOver();
+         this.ui.hideWinScreen();
         this.resetWorldState();
         document.getElementById('startscreen')?.classList.remove('hidden');
     }

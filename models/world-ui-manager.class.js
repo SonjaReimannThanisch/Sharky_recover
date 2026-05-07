@@ -35,6 +35,17 @@ class WorldUiManager {
         if (homeBtn ) {
             homeBtn .onclick = () => this.world.goHome();
         }
+        let winRestartBtn = document.getElementById('btn-win-restart');
+
+        if (winRestartBtn) {
+            winRestartBtn.onclick = () => this.world.restartGame();
+        }
+
+        let winHomeBtn = document.getElementById('btn-win-home');
+
+        if (winHomeBtn) {
+            winHomeBtn.onclick = () => this.world.goHome();
+        }
     }
 
     drawHudWonLayer() {
@@ -71,5 +82,13 @@ class WorldUiManager {
     playNormalDeath() {
         this.showGameOver();
         this.world.sound.playSound('characterDeath');
+    }
+
+    showWinScreen() {
+        document.getElementById('winscreen') ?.classList.remove('hidden');
+    }
+
+    hideWinScreen() { 
+        document.getElementById('winscreen') ?.classList.add('hidden');
     }
 }

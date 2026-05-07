@@ -319,6 +319,23 @@ p { color: var(--color-text-soft); font-size: large; }
   flex-direction: column;
 }
 
+.overlay-win {
+  position: absolute;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.win-actions {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 28px;
+  pointer-events: auto;
+}
+
 @media (max-width: 900px) {
   .mobile-controls {
     display: flex;
