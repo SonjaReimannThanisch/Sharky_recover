@@ -30,7 +30,6 @@ function setupAudioUnlock() {
       gameWorld.sound.playMenu();
     }
   };
-  document.addEventListener('click', unlock, { once: true });
   document.addEventListener('keydown', unlock, { once: true });
 }
 
