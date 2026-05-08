@@ -205,8 +205,7 @@ class World {
     updateWorldState() {
         let now = Date.now();
         this.updateEnvironment();
-        this.collectibles.checkCoinCollision();
-        this.collectibles.checkPoisonCollision();
+        this.collectibles.update();
         this.updateMenuState();
         this.updateEnemies();
         this.updateBossFight();

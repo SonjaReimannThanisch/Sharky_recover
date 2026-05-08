@@ -80,7 +80,8 @@ class WorldCollisionManager {
      * @returns {boolean}
      */
     isBlockedByBarrierOrBoss() {
-        return this.isCollidingWithAnyBarrier();
+        let hitBarrier = this.isCollidingWithAnyBarrier();
+
         let boss = this.world.getEndboss();
         let hitBoss =
             boss &&
@@ -89,6 +90,7 @@ class WorldCollisionManager {
 
         return hitBarrier || hitBoss;
     }
+    
     /**
      * Applies barrier collision damage.
      */
