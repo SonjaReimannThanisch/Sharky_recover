@@ -1,9 +1,19 @@
+/**
+ * Handles game overlays and UI interactions.
+ */
 class WorldUiManager {
 
-        constructor(world) {
+    /**
+     * Creates the UI manager for the game world.
+     * @param {World} world
+     */
+    constructor(world) {
         this.world = world;
     }
 
+    /**
+     * Shows the game over overlay.
+     */
     showGameOver() {
         this.world.sound.stopAllMusic();
         this.world.sound.stopAllSounds();
@@ -12,20 +22,32 @@ class WorldUiManager {
         document.getElementById('gameover')?.classList.remove('hidden');
     }
 
+    /**
+     * Hides the game over overlay.
+     */
     hideGameOver() {
         document.getElementById('gameover')?.classList.add('hidden');
     }
 
+    /**
+     * Stops boss attack behavior during game over.
+     */
     freezeBossForGameOver() {
         let boss = this.world.getEndboss();
         if (!boss) return;
         boss.isAttacking = false;
     }
 
+    /**
+     * Locks the camera on the player position.
+     */
     lockCameraOnPlayer() {
         this.world.camera_x = -this.world.mainCharacter.x;
     }
 
+    /**
+     * Binds all overlay button interactions.
+     */
     bindUi() {
         this.bindButton('btn-restart', () => this.world.restartGame());
         this.bindButton('btn-home', () => this.world.goHome());
@@ -33,12 +55,20 @@ class WorldUiManager {
         this.bindButton('btn-win-home', () => this.world.goHome());
     }
 
+    /**
+     * Binds a UI button action.
+     * @param {string} id
+     * @param {Function} action
+     */
     bindButton(id, action) {
         let button = document.getElementById(id);
         if (!button) return;
         button.onclick = action;
     }
 
+    /**
+     * Draws the win overlay layer.
+     */
     drawHudWonLayer() {
         if (!this.world.hasWon) return;
         this.world.ctx.save();
@@ -53,6 +83,9 @@ class WorldUiManager {
         this.world.addToMap(this.world.winScreen);
     }
 
+    /**
+     * Handles game over state behavior.
+     */
     handleGameOver() {
         if (this.isBossDeath()) {
             this.playBossDeath();
@@ -60,25 +93,41 @@ class WorldUiManager {
         }
         this.playNormalDeath();
     }
-
+    
+    /**
+     * Checks whether the player died from the boss.
+     * @returns {boolean}
+     */
     isBossDeath() {
         return this.world.mainCharacter.deathCause === 'boss';
     }
 
+    /**
+     * Plays the cinematic boss death sequence.
+     */
     playBossDeath() {
         this.world.mainCharacter.isCinematicDead = true;
         setTimeout(() => this.showGameOver(), 1500);
     }
 
+    /**
+     * Plays the normal death sequence.
+     */
     playNormalDeath() {
         this.showGameOver();
         this.world.sound.playSound('characterDeath');
     }
 
+    /**
+     * Shows the win screen overlay.
+     */
     showWinScreen() {
         document.getElementById('winscreen') ?.classList.remove('hidden');
     }
 
+    /**
+     * Hides the win screen overlay.
+     */
     hideWinScreen() { 
         document.getElementById('winscreen') ?.classList.add('hidden');
     }

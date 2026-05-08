@@ -1,6 +1,12 @@
+/**
+ * Handles game music and sound effects.
+ */
 class SoundManager {
     currentTrack = 'menu';
 
+    /**
+     * Creates the sound manager and loads audio assets.
+     */
     constructor() {
         this.isMuted = localStorage.getItem('muted') === 'true';
         this.sounds = {
@@ -28,12 +34,18 @@ class SoundManager {
         this.setupVolume();
     }
 
+    /**
+     * Configures music loop settings.
+     */
     setupMusic() {
         this.music.loop = true;
         this.menuMusic.loop = true;
         this.menuMusic.playbackRate = 1.4;
     }
 
+    /**
+     * Configures default audio volumes.
+     */
     setupVolume() {
         this.music.volume = 0.2;
         this.menuMusic.volume = 0.2;
@@ -42,6 +54,10 @@ class SoundManager {
         });
     }
 
+    /**
+     * Plays a sound effect by name.
+     * @param {string} name
+     */
     playSound(name) {
         if (this.isMuted) return;
         let sound = this.sounds[name];
@@ -50,6 +66,9 @@ class SoundManager {
         sound.play().catch(() => {});
     }
 
+    /**
+     * Starts the menu background music.
+     */
     playMenu() {
         if (this.isMuted) return;
         this.currentTrack = 'menu';
@@ -58,6 +77,9 @@ class SoundManager {
         this.menuMusic.play().catch(() => {});
     }
 
+    /**
+     * Starts the in-game background music.
+     */
     playMusic() {
         if (this.isMuted) return;
         this.currentTrack = 'game';
@@ -66,6 +88,9 @@ class SoundManager {
         this.music.play().catch(() => {});
     }
 
+    /**
+     * Toggles mute state for all audio.
+     */
     toggleMusic() {
         this.isMuted = !this.isMuted;
         localStorage.setItem('muted', this.isMuted);
@@ -77,6 +102,9 @@ class SoundManager {
         this.resumeCurrentTrack();
     }
 
+    /**
+     * Resumes the currently active music track.
+     */
     resumeCurrentTrack() {
         if (this.currentTrack === 'menu') {
             this.menuMusic.play().catch(() => {});
@@ -85,6 +113,10 @@ class SoundManager {
         }
     }
 
+    /**
+     * Stops a specific sound effect.
+     * @param {string} name
+     */
     stopSound(name) {
         let sound = this.sounds[name];
         if (!sound) return;
@@ -92,6 +124,9 @@ class SoundManager {
         sound.currentTime = 0;
     }
     
+    /**
+     * Stops all sound effects.
+     */
     stopAllSounds() {
         Object.values(this.sounds).forEach(sound => {
             sound.pause();
@@ -99,6 +134,9 @@ class SoundManager {
         });
     }
 
+    /**
+     * Stops all music tracks.
+     */
     stopAllMusic() {
         this.music.pause();
         this.menuMusic.pause();

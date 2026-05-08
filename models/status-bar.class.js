@@ -1,3 +1,6 @@
+/**
+ * Represents a HUD status bar for life, coins or poison.
+ */
 class StatusBar extends DrawableObject {
     percentage = 100;
     images = [];
@@ -29,6 +32,10 @@ class StatusBar extends DrawableObject {
         'img/4.Marcadores/green/poisoned bubbles/100_copia3.png',
     ];
 
+    /**
+     * Creates a status bar of the given type.
+     * @param {string} type
+     */
     constructor(type = 'life') {
         super();
         this.images =
@@ -47,12 +54,20 @@ class StatusBar extends DrawableObject {
         this.setPercentage(start);
     }
 
+    /**
+     * Updates the displayed percentage of the status bar.
+     * @param {number} percentage
+     */
     setPercentage(percentage) {
         this.percentage = Math.max(0, Math.min(100, percentage));
         let path = this.images[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Resolves the correct image index for the current percentage.
+     * @returns {number}
+     */
     resolveImageIndex() {
         if (this.percentage >= 100) return 5;
         if (this.percentage >= 80)  return 4;

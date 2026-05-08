@@ -1,9 +1,20 @@
+/**
+ * Creates the collectible manager for the game world.
+ * @param {World} world
+ */
 class WorldCollectibleManager {
 
+    /**
+     * Creates the collectible manager for the game world.
+     * @param {World} world
+     */
     constructor(world) {
         this.world = world;
     }
 
+    /**
+     * Checks collisions between the player and coins.
+     */
     checkCoinCollision() {
         this.world.level.coins.forEach((coin, i) => {
             if (this.world.mainCharacter.isColliding(coin)) {
@@ -15,6 +26,9 @@ class WorldCollectibleManager {
         });
     }
 
+    /**
+     * Checks collisions between the player and poison bottles.
+     */
     checkPoisonCollision() {
         this.world.level.poison.forEach((poison, i) => {
             if (!this.world.mainCharacter.isColliding(poison)) return;
@@ -22,6 +36,10 @@ class WorldCollectibleManager {
         });
     }
 
+    /**
+     * Collects a poison bottle and updates inventory state.
+     * @param {number} index
+     */
     collectPoisonBottle(index) {
         this.world.level.poison.splice(index, 1);
         this.world.sound.playSound('collectBottle');
@@ -29,6 +47,9 @@ class WorldCollectibleManager {
         this.updatePoisonStatusBar();
     }
 
+    /**
+     * Adds poison resources to the player inventory.
+     */
     addPoisonToInventory() {
         this.world.mainCharacter.bottle = Math.min(
             100,
@@ -36,6 +57,9 @@ class WorldCollectibleManager {
         );
     }
 
+    /**
+     * Updates the poison status bar UI.
+     */
     updatePoisonStatusBar() {
         this.world.statusPoison.setPercentage(
             this.world.mainCharacter.bottle

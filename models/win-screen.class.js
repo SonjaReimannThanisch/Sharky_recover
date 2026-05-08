@@ -1,5 +1,7 @@
+/**
+ * Represents the win screen overlay graphics.
+ */
 class WinScreen extends DrawableObject {
-
     alpha = 0;
 
     IMAGES_WIN = [
@@ -13,6 +15,11 @@ class WinScreen extends DrawableObject {
         'img/6.Botones/Tittles/You win/Recurso 22.png',
     ];
 
+    /**
+     * Creates the win screen overlay.
+     * @param {number} canvasWidth
+     * @param {number} canvasHeight
+     */
     constructor(canvasWidth, canvasHeight) {
         super();
         this.loadImage(this.IMAGES_WIN[0]);
