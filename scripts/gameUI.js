@@ -196,7 +196,6 @@ function bindMobileControls(worldInstance) {
   bindMobileButton('mobile-down', worldInstance, 'DOWN');
   bindMobileButton('mobile-fin', worldInstance, 'SPACE');
   bindMobileButton('mobile-bubble', worldInstance, 'D');
-
   document.getElementById('mobile-controls')
     ?.addEventListener('contextmenu', event => event.preventDefault());
 }

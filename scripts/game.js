@@ -1,4 +1,4 @@
-window.DEBUG = true;
+window.DEBUG = false;
 let canvas;
 let gameWorld;
 let keyboard = new Keyboard();
@@ -30,7 +30,7 @@ function setupAudioUnlock() {
       gameWorld.sound.playMenu();
     }
   };
-  document.addEventListener('keydown', unlock, { once: true });
+  document.addEventListener('click', unlock, { once: true });
 }
 
 window.addEventListener("keydown", (event) => {
@@ -45,7 +45,6 @@ window.addEventListener("keydown", (event) => {
   if (event.code === "Escape") keyboard.ESC = true;
   if (event.code === "KeyT") keyboard.T = true;
   if (event.code === "KeyY") keyboard.Y = true;
-
 });
 
 window.addEventListener("keyup", (event) => {
@@ -58,5 +57,4 @@ window.addEventListener("keyup", (event) => {
   if (event.code === "Escape") keyboard.ESC = false;
   if (event.code === "KeyT") keyboard.T = false;
   if (event.code === "KeyY") keyboard.Y = false;
-
 });
