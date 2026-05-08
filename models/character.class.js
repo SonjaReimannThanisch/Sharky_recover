@@ -40,6 +40,7 @@ class Character extends MovableObject {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.images = window.CHARACTER_IMAGES;
         this.loadAllImages();
+        this.animationManager = new CharacterAnimationManager(this);
     }
 
     /**
@@ -67,6 +68,10 @@ class Character extends MovableObject {
         this.setMaxY();
         this.startMovementLoop();
         this.startAnimationLoop();
+    }
+
+    handleAnimations() {
+        this.animationManager.handleAnimations();
     }
 
     /**
@@ -173,286 +178,6 @@ class Character extends MovableObject {
     }
 
     /**
-     * Handles the current character animation state.
-     */
-    handleAnimations() {
-        let now = Date.now();
-        if (this.handleFinSlap(now)) return;
-        if (this.handleBubble(now)) return;
-        if (this.handleCinematicDeath()) return;
-        if (this.handleDeath()) return;
-        if (this.handleHurt()) return;
-        if (this.handleMovement()) return;
-        this.handleIdle();
-    }
-
-    /**
-     * Stops all active movement and animation loops.
-     */
-    stopAnimationLoops() {
-        if (this.movementInterval) {
-            clearInterval(this.movementInterval);
-            this.movementInterval = null;
-        }
-        if (this.animationInterval) {
-            clearInterval(this.animationInterval);
-            this.animationInterval = null;
-        }
-    }
-
-    /**
-     * Handles the fin slap attack animation state.
-     * @param {number} now
-     * @returns {boolean}
-     */
-    handleFinSlap(now) {
-        if (!this.isFinSlapAttacking) return false;
-        this.playAnimation(this.images.FIN_SLAP);
-        if (now - this.finSlapAttackStartedAt > this.finSlapAttackDuration) {
-            this.isFinSlapAttacking = false;
-        }
-        return true;
-    }
-
-    /**
-     * Handles bubble attack animation states.
-     * @param {number} now
-     * @returns {boolean}
-     */
-    handleBubble(now) {
-        if (this.handleChargingBubble(now)) return true;
-        if (this.handleActiveBubble(now)) return true;
-        return false;
-    }
-    
-    /**
-     * Handles the bubble charging animation phase.
-     * @param {number} now
-     * @returns {boolean}
-     */
-    handleChargingBubble(now) {
-        if (!this.isChargingBubble) return false;
-        this.playAnimation(this.images.WHALE_ATTACK);
-        if (now - this.bubbleAttackStartedAt > 300) {
-            this.startBubbleAttack(now);
-        }
-        return true;
-    }
-
-    /**
-     * Starts the active bubble attack phase.
-     * @param {number} now
-     */
-    startBubbleAttack(now) {
-        this.isChargingBubble = false;
-        this.isBubbleAttacking = true;
-        this.bubbleAttackStartedAt = now;
-    }
-
-    /**
-     * Handles the active bubble attack animation.
-     * @param {number} now
-     * @returns {boolean}
-     */
-    handleActiveBubble(now) {
-        if (!this.isBubbleAttacking) return false;
-        this.playAnimation(this.getBubbleAttackImages());
-        if (now - this.bubbleAttackStartedAt > this.bubbleAttackDuration) {
-            this.isBubbleAttacking = false;
-        }
-        return true;
-    }
-
-    /**
-     * Gets the correct bubble attack animation images.
-     * @returns {string[]}
-     */
-    getBubbleAttackImages() {
-        if (this.bubbleAttackType === 'poison') {
-            return this.images.WHALE_ATTACK_BUBBLE;
-        }
-        return this.images.BUBBLE_ATTACK;
-    }
-
-    /**
-     * Handles the cinematic death animation state.
-     * @returns {boolean}
-     */
-    handleCinematicDeath() {
-        if (!this.isCinematicDead) return false;
-        this.playAnimation(this.images.DEAD_CINEMATIC);
-        return true;
-    }
-
-    /**
-     * Handles the standard death animation state.
-     * @returns {boolean}
-     */
-    handleDeath() {
-        if (!this.isDead()) return false;
-        this.playAnimation(this.getDeathImages());
-        return true;
-    }
-
-    /**
-     * Gets the correct death animation images.
-     * @returns {string[]}
-     */
-    getDeathImages() {
-        if (this.lastDamageType === 'electro') {
-            return this.images.ELECTRO_DEAD;
-        }
-        return this.images.POISEN;
-    }
-
-    /**
-     * Handles the hurt animation state.
-     * @returns {boolean}
-     */
-    handleHurt() {
-        if (!this.isHurt()) return false;
-        this.playAnimation(this.getHurtImages());
-        return true;
-    }
-
-    /**
-     * Gets the correct hurt animation images.
-     * @returns {string[]}
-     */
-    getHurtImages() {
-        if (this.lastDamageType === 'electro') {
-            return this.images.ELECTRO_HURT;
-        }
-        return this.images.POISEN_HURT;
-    }
-
-    /**
-     * Handles swimming movement animations and sounds.
-     * @returns {boolean}
-     */
-    handleMovement() {
-        if (!this.isMoving()) return false;
-        this.stopSleepSound();
-        this.playAnimation(this.images.SWIM);
-        this.playSwimSound();
-        return true;
-    }
-
-    /**
-     * Checks whether movement input is active.
-     * @returns {boolean}
-     */
-    isMoving() {
-        return this.world.keyboard.RIGHT ||
-            this.world.keyboard.LEFT ||
-            this.world.keyboard.UP ||
-            this.world.keyboard.DOWN;
-    }
-
-    /**
-     * Stops the sleep sound effect.
-     */
-    stopSleepSound() {
-        if (!this.isSleepingSoundPlaying) return;
-        this.world.sound.stopSound('sleep');
-        this.isSleepingSoundPlaying = false;
-    }
-
-    /**
-     * Checks whether the character entered sleep mode.
-     * @returns {boolean}
-     */
-    isSleeping() {
-        return Date.now() - this.lastActionTime > 10000;
-    }
-
-    /**
-     * Plays the swim sound effect.
-     */
-    playSwimSound() {
-        if (this.isSwimmingSoundPlaying) return;
-        this.world.sound.playSound('swim');
-        this.isSwimmingSoundPlaying = true;
-        setTimeout(() => {
-            this.isSwimmingSoundPlaying = false;
-        }, 200);
-    }
-
-    /**
-     * Handles idle and sleep animations.
-     */
-    handleIdle() {
-        if (!this.canIdle()) {
-            this.stopSleepSound();
-            return;
-        }
-        if (this.idleDuringBossFight()) {
-            this.playAnimation(this.images.IDLE);
-            return;
-        }
-        this.playIdleAnimation();
-    }
-
-    /**
-     * Checks whether the character can enter idle state.
-     * @returns {boolean}
-     */
-    canIdle() {
-        return this.world || !this.world.hasStarted || this.world.isGameOver;
-    }
-
-    /**
-     * Checks whether the boss fight idle animation should play.
-     * @returns {boolean}
-     */
-    idleDuringBossFight() {
-        return this.world && this.world.bossFightStarted && !this.isDead();
-    }
-
-    /**
-     * Plays idle or sleep animations depending on inactivity.
-     */
-    playIdleAnimation() {
-        if (this.isSleeping() && this.world.hasPlayerMoved) {
-            this.playAnimation(this.images.LONG_IDLE);
-            this.playSleepSound();
-            return;
-        }
-        this.stopSleepSound();
-        this.playAnimation(this.images.IDLE);
-    }
-
-    /**
-     * Plays the sleep sound effect.
-     */
-    playSleepSound() {
-        if (this.isSleepingSoundPlaying) return;
-        this.world.sound.playSound('sleep');
-        this.isSleepingSoundPlaying = true;
-    }
-
-    /**
-     * Sets the current damage type for hurt and death animations.
-     * @param {string} type
-     */
-    setDamageType(type) {
-        this.lastDamageType = type;
-    }
-
-    /**
-     * Starts the bubble attack animation sequence.
-     * @param {string} type
-     */
-    startBubbleAttackAnimation(type = 'normal') {
-        this.lastActionTime = Date.now();
-        this.isChargingBubble = true;
-        this.isBubbleAttacking = false;
-        this.bubbleAttackType = type || 'normal';
-        this.bubbleAttackStartedAt = Date.now();
-        this.currentImage = 0;
-    }
-
-    /**
      * Starts the fin slap attack animation sequence.
      */
     startFinSlapAttackAnimation() {
@@ -462,4 +187,45 @@ class Character extends MovableObject {
         this.finSlapAttackStartedAt = Date.now();
         this.currentImage = 0;
     }
+
+    startBubbleAttackAnimation(type = 'normal') {
+    this.animationManager.startBubbleAttackAnimation(type);
+}
+
+    setDamageType(type) {
+        this.animationManager.setDamageType(type);
+    }
+
+    isMoving() {
+        return this.animationManager.isMoving();
+    }
+
+    isSleeping() {
+        return this.animationManager.isSleeping();
+    }
+
+    stopSleepSound() {
+        this.animationManager.stopSleepSound();
+    }
+
+    playSwimSound() {
+        this.animationManager.playSwimSound();
+    }
+
+    canIdle() {
+        return this.animationManager.canIdle();
+    }
+
+    idleDuringBossFight() {
+        return this.animationManager.idleDuringBossFight();
+    }
+
+    playIdleAnimation() {
+        this.animationManager.playIdleAnimation();
+    }
+
+    playSleepSound() {
+        this.animationManager.playSleepSound();
+    }
+
 }
