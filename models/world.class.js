@@ -1,3 +1,6 @@
+/**
+ * Represents the main game world and gameplay loop.
+ */
 class World {
     mainCharacter = new Character();
     level;
@@ -26,6 +29,11 @@ class World {
     bossFightStarted = false;
     bubbles = [];
 
+    /**
+     * Creates the game world and initializes all gameplay systems.
+     * @param {HTMLCanvasElement} canvas
+     * @param {Keyboard} keyboard
+     */
     constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
@@ -42,6 +50,9 @@ class World {
         this.draw();
     }
 
+    /**
+     * Initializes all HUD elements.
+     */
     initHud() {
         this.keyboardSprite = new Keyboard(this.canvas.width, this.canvas.height);
         this.statusLife = new StatusBar('life');
@@ -57,16 +68,25 @@ class World {
         this.collectibles.checkPoisonCollision();
     }
 
+    /**
+     * Initializes all UI systems.
+     */
     initUi() {
         this.ui.bindUi();
         this.winScreen = new WinScreen(this.canvas.width, this.canvas.height);
     }
 
+    /**
+     * Initializes world references and level objects.
+     */
     initWorldState() {
         this.setWorld();
         this.setWorldForLevelObjects();
     }
 
+    /**
+     * Starts the gameplay systems and collision checks.
+     */
     startGame() {
         if (this.hasStarted) return;
         this.hasStarted = true;
@@ -80,6 +100,9 @@ class World {
         this.mainCharacter.world = this;
     }
 
+    /**
+     * Triggers the game over state if the player died.
+     */
     triggerGameOverIfDead() {
         if (this.mainCharacter.energy <= 0 && !this.isGameOver) {
             this.isGameOver = true;
@@ -91,6 +114,12 @@ class World {
         }
     }
 
+    /**
+     * Applies damage to the player character.
+     * @param {number} amount
+     * @param {string} type
+     * @param {string} cause
+     */
     applyDamage(amount = 5, type = 'poison', cause = '') {
         this.mainCharacter.setDamageType(type);
         this.mainCharacter.deathCause = cause;
@@ -103,6 +132,10 @@ class World {
         this.playDamageSound(type);
     }
 
+    /**
+     * Plays the correct damage sound effect.
+     * @param {string} type
+     */
     playDamageSound(type) {
         if (type === 'electro') {
             this.sound.playSound('electroHit');
@@ -115,6 +148,10 @@ class World {
         this.sound.playSound('hit');
     }
 
+    /**
+     * Reduces the player energy value.
+     * @param {number} amount
+     */
     reduceCharacterEnergy(amount) {
         this.mainCharacter.energy = Math.max(
             0,
@@ -123,6 +160,10 @@ class World {
         this.mainCharacter.lastHit = new Date().getTime();
     }
 
+    /**
+     * Gets the current endboss instance.
+     * @returns {Endboss}
+     */
     getEndboss() {
         return this.level.enemies.find(e => e instanceof Endboss);
     }
@@ -131,6 +172,9 @@ class World {
         return this.keyboard.LEFT || this.keyboard.RIGHT || this.keyboard.UP || this.keyboard.DOWN;
     }
 
+    /**
+     * Updates looping background positions.
+     */
     updateBackground() {
         let w = this.TILE_WIDTH;
         let groups = [
@@ -147,6 +191,9 @@ class World {
         });
     }
 
+    /**
+     * Updates animated light layers.
+     */
     updateLights() {
         let w = this.TILE_WIDTH;
         let leftEdge = -this.camera_x;
@@ -159,6 +206,10 @@ class World {
         });
     }
 
+    /**
+     * Checks whether gameplay is currently active.
+     * @returns {boolean}
+     */
     isRunningGame() {
         return this.hasStarted && !this.isGameOver && !this.hasWon;
     }
@@ -167,6 +218,9 @@ class World {
         this.level.enemies.forEach(enemy => enemy.world = this);
     }
 
+    /**
+     * Starts the main render loop.
+     */
     draw() {
         this.beginFrame();
         if (this.isRunningGame()) this.updateWorldState();
@@ -182,6 +236,9 @@ class World {
         }
     }
 
+    /**
+     * Updates all active gameplay systems.
+     */
     updateWorldState() {
         let now = Date.now();
         this.updateEnvironment();
@@ -220,6 +277,9 @@ class World {
         this.combat.handleAttackInput(now);
     }
 
+    /**
+     * Draws all world objects.
+     */
     drawWorldLayer() {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.background);
@@ -233,6 +293,9 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
     }
 
+    /**
+     * Draws all HUD elements.
+     */
     drawHudLayer() {
         this.addToMap(this.statusLife);
         this.addToMap(this.statusCoins);
@@ -244,6 +307,9 @@ class World {
         requestAnimationFrame(this.draw.bind(this));
     }
 
+    /**
+     * Restarts the current game state.
+     */
     restartGame() {
         this.ui.hideGameOver();
         this.ui.hideWinScreen();
@@ -255,6 +321,9 @@ class World {
         this.collision.checkCollisions();
     }
 
+    /**
+     * Resets all gameplay state values.
+     */
     resetWorldState() {
         this.resetIntervals();
         this.resetFlags();
@@ -304,6 +373,9 @@ class World {
         this.winScreen = new WinScreen(this.canvas.width, this.canvas.height);
     }
 
+    /**
+     * Handles active boss fight behavior.
+     */
     handleBossState() {
         if (!this.bossFightStarted) return;
         let boss = this.getEndboss();
@@ -318,10 +390,18 @@ class World {
         }
     }
 
+    /**
+     * Adds multiple objects to the render pipeline.
+     * @param {Array} objects
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => this.addToMap(o));
     }
 
+    /**
+     * Draws a single object on the canvas.
+     * @param {DrawableObject} mo
+     */
     addToMap(mo) {
         const prevAlpha = this.ctx.globalAlpha;
         if (mo.alpha !== undefined) this.ctx.globalAlpha = mo.alpha;
@@ -344,6 +424,9 @@ class World {
         this.ctx.restore();
     }
 
+    /**
+     * Returns the player to the start screen.
+     */
     goHome() {
         this.sound.stopAllMusic();
         this.sound.playMenu();
@@ -353,6 +436,9 @@ class World {
         document.getElementById('startscreen')?.classList.remove('hidden');
     }
 
+    /**
+     * Handles menu input actions.
+     */
     checkMenuInput() {
         if (!this.keyboard.ESC) return;
         if (document.fullscreenElement) return;
@@ -360,6 +446,9 @@ class World {
         this.keyboard.ESC = false;
     }
 
+    /**
+     * Starts the boss fight when the trigger area is reached.
+     */
     checkEndbossTrigger() {
         if ( this.bossFightStarted) return;
         let boss = this.getEndboss();
