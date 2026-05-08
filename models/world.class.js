@@ -39,6 +39,8 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.combat = new CombatWorld(this);
         this.ui = new WorldUiManager(this);
+        this.environment = new WorldEnvironmentManager(this);
+        this.reset = new WorldResetManager(this);
         this.collision = new WorldCollisionManager(this);
         this.collectibles = new WorldCollectibleManager(this);
         this.keyboard = keyboard;
@@ -61,11 +63,6 @@ class World {
         this.statusLife.y = 45;
         this.statusCoins.y = 80;
         this.statusPoison.y = 10;
-    }
-
-    updateCollectibles() {
-        this.collectibles.checkCoinCollision();
-        this.collectibles.checkPoisonCollision();
     }
 
     /**
@@ -173,40 +170,6 @@ class World {
     }
 
     /**
-     * Updates looping background positions.
-     */
-    updateBackground() {
-        let w = this.TILE_WIDTH;
-        let groups = [
-            this.level.background.slice(0, 2),
-            this.level.background.slice(2, 4),
-            this.level.background.slice(4, 6),
-        ];
-        let leftEdge = -this.camera_x;
-        let rightEdge = leftEdge + w;
-        groups.forEach(g => { g.forEach(bg => {
-            if (bg.x + w < leftEdge) bg.x += w * g.length
-            if (bg.x > rightEdge) bg.x -= w * g.length;
-            });
-        });
-    }
-
-    /**
-     * Updates animated light layers.
-     */
-    updateLights() {
-        let w = this.TILE_WIDTH;
-        let leftEdge = -this.camera_x;
-        let rightEdge = leftEdge + w;
-        let t = performance.now() / 1000;
-        this.level.lights.forEach(light => {
-            light.update(t);
-            if (light.x + w < leftEdge) light.x += w * this.level.lights.length;
-            if (light.x > rightEdge)    light.x -= w * this.level.lights.length;
-        });
-    }
-
-    /**
      * Checks whether gameplay is currently active.
      * @returns {boolean}
      */
@@ -242,7 +205,8 @@ class World {
     updateWorldState() {
         let now = Date.now();
         this.updateEnvironment();
-        this.updateCollectibles();
+        this.collectibles.checkCoinCollision();
+        this.collectibles.checkPoisonCollision();
         this.updateMenuState();
         this.updateEnemies();
         this.updateBossFight();
@@ -250,9 +214,8 @@ class World {
     }
 
     updateEnvironment() {
-        this.updateBackground();
-        this.updateLights();
-        this.collision.checkBarrierCollision();
+        this.environment.update();
+        this.collectibles.update();
     }
 
     updateMenuState() {
@@ -325,52 +288,7 @@ class World {
      * Resets all gameplay state values.
      */
     resetWorldState() {
-        this.resetIntervals();
-        this.resetFlags();
-        this.resetCollections();
-        this.resetLevelState();
-        this.resetHudState();
-        this.resetWinState();  
-    }
-    
-    resetIntervals() {
-        clearInterval(this.enemyCollisionInterval);
-        this.enemyCollisionInterval = null;
-    }
-
-    resetFlags() {
-        this.hasPlayerMoved = false;
-        this.bossFightStarted = false;
-        this.isGameOver = false;
-        this.hasStarted = false;
-        this.hasWon = false;
-    }
-
-    resetCollections() {
-        this.attacks = [];
-        this.bubbles = [];
-        this.lastFinSlapAt = 0;
-        this.lastBubbleAt = 0;
-        this.lastX = 0;
-        this.lastY = 0;
-        this.camera_x = 0;
-    }
-
-    resetLevelState() {
-        this.level = createLevel1();
-        this.mainCharacter = new Character();
-        this.setWorld();
-        this.setWorldForLevelObjects();
-    }
-
-    resetHudState() {
-        this.statusLife.setPercentage(this.mainCharacter.energy);
-        this.statusCoins.setPercentage(0);
-        this.statusPoison.setPercentage(0);
-    }
-
-    resetWinState() {
-        this.winScreen = new WinScreen(this.canvas.width, this.canvas.height);
+        this.reset.reset(); 
     }
 
     /**

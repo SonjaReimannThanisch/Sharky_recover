@@ -1,6 +1,5 @@
 /**
- * Creates the collectible manager for the game world.
- * @param {World} world
+ * Handles collectible item collisions and inventory updates.
  */
 class WorldCollectibleManager {
 
@@ -64,6 +63,11 @@ class WorldCollectibleManager {
         this.world.statusPoison.setPercentage(
             this.world.mainCharacter.bottle
         );
+    }
+
+    update() {
+        this.checkCoinCollision();
+        this.checkPoisonCollision();
     }
 
 }
