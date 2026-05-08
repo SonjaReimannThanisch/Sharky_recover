@@ -1,3 +1,6 @@
+/**
+ * Represents the whale endboss enemy.
+ */
 class Endboss extends MovableObject {
     height = 600;
     width = 600;
@@ -26,6 +29,11 @@ class Endboss extends MovableObject {
         bottom: 70,
     }
 
+    /**
+     * Creates the endboss and loads all animations.
+     * @param {number} x
+     * @param {number} y
+     */
     constructor(x, y) {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.images = window.ENDBOSS_IMAGES;
@@ -34,6 +42,9 @@ class Endboss extends MovableObject {
         this.loadAllImages();
     }
 
+    /**
+     * Loads all endboss animation images.
+     */
     loadAllImages() {
         this.loadImages(this.images.INTRO);
         this.loadImages(this.images.IDLE);
@@ -42,6 +53,9 @@ class Endboss extends MovableObject {
         this.loadImages(this.images.DEAD);
     }
 
+    /**
+     * Starts the endboss intro sequence.
+     */
     startIntro() {
         if (this.isAwakened) return;
         this.world.sound.playSound('endbossIntro');
@@ -51,6 +65,9 @@ class Endboss extends MovableObject {
         this.startAnimationLoop();
     }
 
+    /**
+     * Updates endboss movement and attack behavior.
+     */
     update() {
         if (this.handleIntro())return;
         if (!this.canUpdate()) return;
@@ -60,6 +77,10 @@ class Endboss extends MovableObject {
         this.updateAttack(now);
     }
 
+    /**
+     * Handles the intro animation movement.
+     * @returns {boolean}
+     */
     handleIntro() {
         if (!this.isIntroducing) return false;
         this.y += this.introSpeedY;
@@ -69,6 +90,9 @@ class Endboss extends MovableObject {
         return true;
     }
 
+    /**
+     * Finishes the intro phase and activates the boss fight.
+     */
     endbossIntro() {
         this.y = this.finalY;
         this.isIntroducing = false;
@@ -76,14 +100,25 @@ class Endboss extends MovableObject {
         this.lastAttackAt = Date.now() - this.attackCooldown;
     }
 
+    /**
+     * Checks whether the endboss can update.
+     * @returns {boolean}
+     */
     canUpdate() {
         return this.isActive && !this.isDead;
     }
 
+    /**
+     * Keeps the endboss inside the fight area.
+     */
     keepInFightArea() {
         this.x = Math.max(3600, Math.min(this.x, 4550));
     }
 
+    /**
+     * Starts an attack if the cooldown expired.
+     * @param {number} now
+     */
     tryStartAttack(now) {
         if (this.isAttacking && !this._isHurt) return;
         if (now - this.lastAttackAt < this.attackCooldown) return;
@@ -91,6 +126,10 @@ class Endboss extends MovableObject {
         
     }
 
+    /**
+     * Updates the active attack movement.
+     * @param {number} now
+     */
     updateAttack(now) {
         if (!this.isAttacking) return;
         let distanceToPlayer = this.getDistanceToPlayer();
@@ -102,6 +141,10 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Gets the horizontal distance to the player.
+     * @returns {number}
+     */
     getDistanceToPlayer() {
         let player = this.world.mainCharacter;
         let bossCenterX = this.x + this.width / 2;
@@ -110,6 +153,9 @@ class Endboss extends MovableObject {
         return Math.abs(playerCenterX - bossCenterX);
     }
 
+    /**
+     * Starts the endboss attack sequence.
+     */
     startAttack() {
         if (!this.world) return;
         let player = this.world.mainCharacter;
@@ -125,11 +171,17 @@ class Endboss extends MovableObject {
         this.world.sound.playSound('endbossAttack');
     }
 
+    /**
+     * Stops the current attack.
+     */
     stopAttack() {
         this.isAttacking= false;
         this.lastAttackAt = Date.now();
     }
 
+    /**
+     * Starts the endboss animation loop.
+     */
     startAnimationLoop() {
         if (this.animationInterval) return;
 
@@ -148,10 +200,18 @@ class Endboss extends MovableObject {
         }, 200);
     }   
 
+    /**
+     * Checks whether the endboss can collide with the player.
+     * @returns {boolean}
+     */
     isCollidable() {
         return this.isActive;
     }
 
+    /**
+     * Applies damage to the endboss.
+     * @param {string} type
+     */
     hit(type = 'normal') {
         if (!this.isActive || this.isDead) return;
         this.takeDamage(type);
@@ -165,10 +225,17 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Calculates damage based on attack type.
+     * @param {string} type
+     */
     takeDamage(type) {
         this.energy -= type === 'poison' ? 20 : 5;
     }
 
+    /**
+     * Starts the temporary hurt animation state.
+     */
     startHurtState() {
         this._isHurt = true;
         setTimeout(() => {
@@ -176,6 +243,9 @@ class Endboss extends MovableObject {
         }, 300);
     }
 
+    /**
+     * Handles endboss death behavior.
+     */
     die() {
         if (this.isDead) return;
         this.isDead = true;
