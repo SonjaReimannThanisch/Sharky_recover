@@ -1,3 +1,6 @@
+/**
+ * Represents the game over screen graphics.
+ */
 class GameOverScreen extends DrawableObject {
 
     IMAGES_GAMEOVER = [
@@ -8,6 +11,9 @@ class GameOverScreen extends DrawableObject {
         'img/6.Botones/Try again/Recurso 15.png',
     ];
 
+    /**
+     * Creates the game over screen assets.
+     */
     constructor() {
         super();
         this.loadImage(this.IMAGES_GAMEOVER[0]);

@@ -1,10 +1,16 @@
+/**
+ * Represents movable game objects with collision and damage logic.
+ */
 class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     energy = 100;
     lastHit = 0;
 
-    
+    /**
+     * Draws collision debug frames for movable objects.
+     * @param {CanvasRenderingContext2D} ctx
+     */    
     drawFrame(ctx) {
         if (!window.DEBUG) return;
         if(this instanceof Character || this instanceof Pufferfisch || this instanceof Jellyfisch || this instanceof Endboss || this instanceof Barriers || this instanceof Attack) {
@@ -22,6 +28,11 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Checks collision between two game objects.
+     * @param {MovableObject} mo
+     * @returns {boolean}
+     */
     isColliding(mo) {
         const a = this.offset || { top: 0, left: 0, right: 0, bottom: 0 };
         const b = mo.offset || { top: 0, left: 0, right: 0, bottom: 0 };
@@ -41,7 +52,9 @@ class MovableObject extends DrawableObject {
                 ax < bx + bw &&
                 ay < by + bh;
     }
-
+    /**
+     * Applies damage to the object.
+     */
     hit() {
         this.energy -= 5;
         if (this.energy <= 0) {
@@ -51,12 +64,20 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Checks whether the object is currently hurt.
+     * @returns {boolean}
+     */
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;
         timePassed = timePassed / 1000;        
         return timePassed < 0.6;
     }
 
+    /**
+     * Checks whether the object has no energy left.
+     * @returns {boolean}
+     */
     isDead() {
         return this.energy === 0;
     }
