@@ -11,7 +11,6 @@ class Keyboard {
     ESC = false;
     T = false;
     Y = false;
-
     height = 100;
     width = 165;
     y = 80;

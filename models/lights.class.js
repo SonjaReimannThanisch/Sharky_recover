@@ -11,7 +11,6 @@ class Light extends MovableObject {
   baseY = 0;
   wobbleAmp = 2;
   wobbleSpeed = 2;
-
   phase = Math.random() * Math.PI * 2;
 
   /**
