@@ -37,9 +37,12 @@
   }
 }
 
-@media (orientation: landscape) and (max-height: 500px) {
+@media (orientation: landscape)
+and (max-height: 500px)
+and (max-width: 900px)  {
   body {
     align-items: center;
+    transform: scale(0.95);
   }
 
   header {
