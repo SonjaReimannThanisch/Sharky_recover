@@ -19,6 +19,17 @@
   z-index: 10000;
 }
 
+#impressumOverlay .banner {
+  width: min(90vw, 400px);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#impressumOverlay p {
+  word-break: break-word;
+  text-align: center;
+}
+
 .banner {
   width: 320px;
   height: 360px;
