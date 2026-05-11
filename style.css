@@ -110,11 +110,11 @@ canvas {
   gap: 22px;
 }
 
-.key-arrows { width: 150px; }
-.key-space { width: 230px; }
-.key-d { width: 44px; }
-.title-move { width: 220px; }
-.title-attack { width: 130px; }
+.key-arrows {width: clamp(150px, 18vw, 180px);}
+.key-space {width: clamp(230px, 22vw, 240px);}
+.key-d {width: clamp(44px, 8vw, 44px);}
+.title-move,
+.title-attack { width: clamp(130px, 18vw, 220px);}
 
 #btn-impressum {
   background: transparent;
@@ -134,11 +134,10 @@ canvas {
 
 .img-btn img { 
   width: clamp(120px, 30vw, 280px);
-  height: auto;
 }
 
 .img-btn.small img {
-  width: clamp(90px, 22vmin, 160px);
+  width: clamp(80px, 22vh, 120px);
 }
 
 #btn-start {
@@ -234,3 +233,6 @@ p { color: var(--color-text-soft); font-size: large; }
   flex-direction: column;
 }
 
+.mobile-controls.hidden {
+  display: none !important;
+}

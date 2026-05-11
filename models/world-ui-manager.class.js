@@ -20,7 +20,7 @@ class WorldUiManager {
         this.freezeBossForGameOver();
         this.lockCameraOnPlayer();
         document.getElementById('gameover')?.classList.remove('hidden');
-        document.getElementById('mobile-controls')?.classList.remove('hidden');
+        document.getElementById('mobile-controls')?.classList.add('hidden');
     }
 
     /**
@@ -124,15 +124,15 @@ class WorldUiManager {
      * Shows the win screen overlay.
      */
     showWinScreen() {
-        document.getElementById('winscreen') ?.classList.remove('hidden');
-        document.getElementById('mobile-controls')?.classList.remove('hidden');
+        document.getElementById('winscreen')?.classList.remove('hidden');
+        document.getElementById('mobile-controls')?.classList.add('hidden');
     }
 
     /**
      * Hides the win screen overlay.
      */
     hideWinScreen() { 
-        document.getElementById('winscreen') ?.classList.add('hidden');
+        document.getElementById('winscreen')?.classList.add('hidden');
         document.getElementById('mobile-controls')?.classList.remove('hidden');
     }
 }

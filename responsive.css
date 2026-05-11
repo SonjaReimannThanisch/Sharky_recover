@@ -24,6 +24,10 @@
   .game {
     display: none;
   }
+
+  .overlay {
+    transform: scale(0.8);
+  }
 }
 
 @media (max-width: 600px) {
@@ -50,18 +54,6 @@
     height: auto;
     max-height: 95vh;
     padding-top: 0;
-  }
-
-  #startscreeen {
-    transform: scale(0.9);
-  }
-
-  .img-btn img {
-    width: clamp(120px, 150vh, 100px)
-  }
-
-  .img-btn.small img {
-    width: clamp(80px, 22vh, 120px);
   }
 
   .mobile-controls button {
