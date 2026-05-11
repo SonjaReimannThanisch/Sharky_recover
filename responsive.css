@@ -25,9 +25,6 @@
     display: none;
   }
 
-  .overlay {
-    transform: scale(0.8);
-  }
 }
 
 @media (max-width: 600px) {
@@ -43,7 +40,6 @@
 @media (orientation: landscape) and (max-height: 500px) {
   body {
     align-items: center;
-    transform: scale(0.9);
   }
 
   header {

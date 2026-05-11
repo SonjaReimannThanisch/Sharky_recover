@@ -76,7 +76,6 @@
   padding: clamp(8px, 2vw, 12px) clamp(10px, 3vw, 18px);
   font-size: clamp(12px, 3vw, 16px);
   border-radius: var(--radius-small);
-  font-size: 16px;
   font-weight: 600;
   background-color: var(--color-primary);
   color: var(--color-accent);
