@@ -64,6 +64,13 @@
   object-fit: contain;
 }
 
+.banner p {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+  font-size: clamp(14px, 2vw, 22px);
+}
+
 .actions,
 .start-footer {
   display: flex;

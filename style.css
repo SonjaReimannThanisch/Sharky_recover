@@ -70,6 +70,7 @@ canvas {
   width: min(90vw, 720px);
   height: auto;
   max-width: 100%;
+  max-height: 100dvh;
   aspect-ratio: 4 / 3;
   display: block;
   box-shadow: var(--shadow-canvas);
@@ -90,7 +91,14 @@ canvas {
   justify-content: space-around;
   overflow: hidden;
   background: var(--bg-water) center / cover no-repeat;
-  box-shadow: var(--shadow-panel);
+  /* box-shadow: var(--shadow-panel); */
+  border: 1px solid rgba(170, 255, 240, 0.25);
+
+  box-shadow:
+    0 0 12px rgba(120, 255, 230, 0.18),
+    0 0 40px rgba(0, 180, 255, 0.12);
+
+  backdrop-filter: blur(6px);
 }
 
 .start-controls {
@@ -235,4 +243,11 @@ p { color: var(--color-text-soft); font-size: large; }
 
 .mobile-controls.hidden {
   display: none !important;
+}
+
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
 }
