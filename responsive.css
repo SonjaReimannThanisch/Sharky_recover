@@ -36,7 +36,7 @@
     width: 95vw;
   }
 
-  header h1 {
+  header {
     display: none;
   }
 }
