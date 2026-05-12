@@ -35,7 +35,6 @@
   height: auto;
   min-height: clamp(260px, 60vh, 360px);
   padding: clamp(14px, 3vw, 28px);
-  gap: clamp(10px, 2vw, 22px);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -105,10 +104,10 @@
 
 .close-btn {
   position: absolute;
-  top: -30px;
-  right: -32px;
-  min-width: 28px;
-  padding: 8px 10px;
+  top: 40px;
+  right: 9px;
+  min-width: 27px;
+  padding: 6px 10px;
 }
 
 .overlay-win {
