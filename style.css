@@ -41,6 +41,7 @@ header,
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%
 }
 
 body { background: var(--bg-water) center / cover no-repeat; }
@@ -77,12 +78,20 @@ canvas {
   background-color: rgba(84,76,225,0.15);
 }
 
+.game,
+#fullscreen,
+.overlay-start,
+.start-wrap {
+  width: min(95vw, 720px);
+}
+
 .hidden { display: none; }
 
 
 .start-wrap {
   width: min(95%, 720px);
-  height: min(90vh, 480px);
+  /* height: min(90vh, 480px); */
+  height: 100%;
   padding: 10px;
   border-radius: var(--radius-medium);
   display: flex;
@@ -91,13 +100,10 @@ canvas {
   justify-content: space-around;
   overflow: hidden;
   background: var(--bg-water) center / cover no-repeat;
-  /* box-shadow: var(--shadow-panel); */
   border: 1px solid rgba(170, 255, 240, 0.25);
-
   box-shadow:
     0 0 12px rgba(120, 255, 230, 0.18),
     0 0 40px rgba(0, 180, 255, 0.12);
-
   backdrop-filter: blur(6px);
 }
 
