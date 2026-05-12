@@ -82,7 +82,7 @@ canvas {
 #fullscreen,
 .overlay-start,
 .start-wrap {
-  width: min(98%, 720px);
+  width: min(95vw, 720px);
 }
 
 .hidden { display: none; }
