@@ -25,6 +25,10 @@
     display: none;
   }
 
+    header {
+    display: none;
+  }
+
 }
 
 @media (max-width: 600px) {
