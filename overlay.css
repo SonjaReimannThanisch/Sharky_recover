@@ -99,7 +99,7 @@
   position: absolute;
   inset: 0;
   z-index: 9999;
-  background: rgba(10,3,37,0.75);
+  /* background: rgba(10,3,37,0.75); */
 }
 
 .close-btn {
