@@ -71,6 +71,12 @@ and (max-width: 900px)  {
     font-size: 14px;
   }
 
+  .start-wrap {
+    height: 100%;
+    padding: 8px;
+    gap: 8px;
+  }
+
   .start-controls {
     padding: 8px 28px;
   }

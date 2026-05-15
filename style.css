@@ -15,7 +15,7 @@
   --color-overlay-light: #6fa8ff;
   --color-overlay-dark: #163a8f;
   --radius-small: 12px;
-  --radius-medium: 18px;
+  --radius-medium: 0px 0px 18px 18px;;
   --radius-header: 48px 48px 0 0;
   --shadow-canvas: 0 10px 40px rgba(0,0,0,0.4);
   --shadow-panel: 0 18px 45px rgba(0,0,0,0.45);
@@ -72,13 +72,14 @@ header h1 {
 }
 
 canvas {
-  width: min(95%, 720px);
+  width: 100%;
   max-width: 100%;
   max-height: 82svh;
   height: auto;
   aspect-ratio: 4 / 3;
   display: block;
   box-shadow: var(--shadow-canvas);
+  border-radius: var(--radius-medium);
   background-color: rgba(84,76,225,0.15);
 }
 
@@ -93,10 +94,9 @@ canvas {
 
 
 .start-wrap {
-  width: min(96vw, 720px);
-  height: auto;
-  /* max-height: 100svh; */
-  gap: 8px;
+  width: 100%;
+  height: 100%;
+  gap: 48px;
   padding: 18px;
   border-radius: var(--radius-medium);
   display: flex;
