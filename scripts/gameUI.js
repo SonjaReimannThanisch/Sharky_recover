@@ -51,9 +51,9 @@ function injectMobileControls() {
       <div class="mobile-move">
         <button id="mobile-up">▲</button>
         <div>
-          <button id="mobile-left">◀</button>
+          <button id="mobile-left" style="transform: rotate(90deg);">▼</button>
           <button id="mobile-down">▼</button>
-          <button id="mobile-right">▶</button>
+          <button id="mobile-right" style="transform: rotate(90deg);">▲</button>
         </div>
       </div>
 
