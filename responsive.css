@@ -64,15 +64,12 @@ and (max-width: 900px)  {
     width: min(96vw, 720px);
     height: auto;
     padding-top: 0;
+    border-radius: 18px 18px;
   }
 
   .mobile-controls button {
     padding: 8px 12px;
     font-size: 14px;
-  }
-
-  canvas {
-    border-radius: 18px 18px;
   }
 
   .start-wrap {
@@ -84,7 +81,6 @@ and (max-width: 900px)  {
   }
 
   .start-controls {
-    /* width: 76%; */
     gap: 4px;
     padding: 6px 10px;
   }
@@ -116,6 +112,10 @@ and (max-width: 900px)  {
 
   .img-btn.small img {
     width: clamp(60px, 14vw, 90px);
+  }
+
+  .impressum-link {
+    padding-bottom: 0;
   }
 
 }
