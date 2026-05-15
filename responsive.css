@@ -71,14 +71,39 @@ and (max-width: 900px)  {
     font-size: 14px;
   }
 
+  canvas {
+    border-radius: 18px 18px;
+  }
+
   .start-wrap {
+    border-radius: 18px 18px;
+    box-sizing: border-box;
     height: 100%;
     padding: 8px;
     gap: 8px;
   }
 
   .start-controls {
-    padding: 8px 28px;
+    width: 76%;
+    gap: 4px;
+    padding: 6px 10px;
+  }
+
+  .control-line {
+    gap: 8px;
+  }
+
+  .key-arrows {
+    width: clamp(90px, 18vw, 130px);
+  }
+
+  .key-space {
+    width: clamp(150px, 32vw, 210px);
+  }
+
+  .title-move,
+  .title-attack {
+    width: clamp(110px, 22vw, 170px);
   }
 
   .img-btn {
@@ -86,7 +111,11 @@ and (max-width: 900px)  {
   }
 
   .img-btn img {
-    width: clamp(90px, 22vw, 190px);
+    width: clamp(90px, 20vw, 160px);
+  }
+
+  .img-btn.small img {
+    width: clamp(60px, 14vw, 90px);
   }
 
 }
