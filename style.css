@@ -95,9 +95,9 @@ canvas {
 .start-wrap {
   width: min(96vw, 720px);
   height: auto;
-  /* max-height: 78svh; */
+  /* max-height: 100svh; */
   gap: 8px;
-  padding: 16px;
+  padding: 18px;
   border-radius: var(--radius-medium);
   display: flex;
   flex-direction: column;
