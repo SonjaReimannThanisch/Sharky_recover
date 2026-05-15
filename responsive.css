@@ -25,7 +25,7 @@
     display: none;
   }
 
-    .start-wrap {
+  .start-wrap {
     width: min(96vw, 720px);
     min-height: 82svh;
     padding: 12px;
