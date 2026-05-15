@@ -39,10 +39,10 @@
 @media (orientation: landscape)
 and (max-height: 500px)
 and (max-width: 900px)  {
-  body {
+  /* body {
     align-items: center;
     transform: scale(0.95);
-  }
+  } */
 
   header {
     display: none;
