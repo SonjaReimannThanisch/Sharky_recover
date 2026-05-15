@@ -93,15 +93,16 @@ canvas {
 
 
 .start-wrap {
-  width: min(98%, 720px);
-  /* height: min(90vh, 480px); */
-  height: 100%;
-  padding: 10px;
+  min-height: min(86svh, 520px);
+  height: auto;
+  justify-content: center;
+  gap: 18px;
+  padding: 16px;
   border-radius: var(--radius-medium);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+
   overflow: hidden;
   background: var(--bg-water) center / cover no-repeat;
   border: 1px solid rgba(170, 255, 240, 0.25);
@@ -112,7 +113,7 @@ canvas {
 }
 
 .start-controls {
-  width: 82%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 18px;
