@@ -24,11 +24,6 @@
   .game {
     display: none;
   }
-
-  /* header {
-    display: none;
-  } */
-
 }
 
 @media (orientation: landscape) and (max-height: 600px) {
