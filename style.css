@@ -90,8 +90,8 @@ canvas {
 
 .start-wrap {
   width: min(98%, 720px);
-  /* height: min(90vh, 480px); */
-  height: 100%;
+  height: min(90vh, 480px);
+  /* height: 100%; */
   /* padding: 10px; */
   border-radius: var(--radius-medium);
   display: flex;
