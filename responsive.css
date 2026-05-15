@@ -39,18 +39,14 @@
 @media (orientation: landscape)
 and (max-height: 500px)
 and (max-width: 900px)  {
-  /* body {
-    align-items: center;
-    transform: scale(0.95);
-  } */
-
   header {
     display: none;
   }
 
   canvas {
+    width: min(96vw, 720px);
     height: auto;
-    max-height: 95vh;
+    max-height: 82svh;
     padding-top: 0;
   }
 
