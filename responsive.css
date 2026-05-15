@@ -84,7 +84,7 @@ and (max-width: 900px)  {
   }
 
   .start-controls {
-    width: 76%;
+    /* width: 76%; */
     gap: 4px;
     padding: 6px 10px;
   }
