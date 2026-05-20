@@ -27,6 +27,9 @@ function injectStartScreen() {
           <button id="btn-fullscreen" class="img-btn small" aria-label="Fullscreen">
             <img src="img/6.Botones/Full Screen/Mesa de trabajo 9.png" alt="Full screen">
           </button>
+          <button id="btn-howto" class="img-btn small" aria-label="How to play">
+            How to play
+          </button>
           <button id="btn-mute-start" class="hud-btn small" aria-label="Mute music">
             🔊
           </button>
@@ -98,6 +101,18 @@ function bindStartUi(worldInstance) {
   bindStartButton(worldInstance);
   bindFullscreenButton(worldInstance);
   bindStartMuteButton(worldInstance);
+  bindHowToButton(worldInstance);
+}
+
+/**
+ * Binds the how-to button interaction.
+ * @param {World} worldInstance
+ */
+function bindHowToButton(worldInstance) {
+  document.getElementById('btn-howto')?.addEventListener('click', () => {
+    worldInstance.sound.playSound('itemsSelect');
+    openHowTo();
+  });
 }
 
 /**
@@ -231,4 +246,18 @@ function openImpressum() {
  */
 function closeImpressum() {
   document.getElementById('impressumOverlay')?.classList.add('hidden');
+}
+
+/**
+ * Opens the how-to-play overlay.
+ */
+function openHowTo() {
+  document.getElementById('howToOverlay')?.classList.remove('hidden');
+}
+
+/**
+ * Closes the how-to-play overlay.
+ */
+function closeHowTo() {
+  document.getElementById('howToOverlay')?.classList.add('hidden');
 }
