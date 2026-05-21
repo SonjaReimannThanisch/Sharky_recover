@@ -189,10 +189,15 @@ p { color: var(--color-text-soft); font-size: large; }
 .impressum-link {
   color: var(--color-white);
   cursor: var(--cursor);
-  opacity: 0.85;
   text-decoration: none;
-  font-weight: 600;
-  padding-bottom: 20px;
+  border: 2px solid white;
+  padding: 0px 18px;
+  border-radius: 8px;
+  background-color: var(--color-primary);
+  margin-bottom: 19px;
+  font-size: medium;
+  display: flex;
+  align-items: center;
 }
 
 #fullscreen:fullscreen {
