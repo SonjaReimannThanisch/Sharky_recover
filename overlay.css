@@ -138,18 +138,20 @@
 }
 
 .howto-line img {
-  width: 42px;
-  height: 42px;
+  width: 76px;
   min-height: unset;
-  object-fit: contain;
-  flex-shrink: 0;
+  background: rgba(83, 26, 130, 0.18);
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(2px);
+  border-radius: 12px;
 }
 
 #howToOverlay .banner {
   justify-content: flex-start;
-  gap: 18px;
+  gap: 4px;
 }
 
 .howto-btn {
-  right: -24px;
+  right: -27px;
+  top: 20px;
 }
