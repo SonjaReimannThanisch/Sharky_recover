@@ -15,7 +15,8 @@
   box-shadow: var(--shadow-overlay);
 }
 
-#impressumOverlay {
+#impressumOverlay,
+#howToOverlay  {
   z-index: 10000;
 }
 
@@ -54,6 +55,7 @@
   margin: 0;
   font-size: clamp(28px, 6vw, 44px);
   letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .banner img {
@@ -103,7 +105,7 @@
 
 .close-btn {
   position: absolute;
-  top: 40px;
+  top: 5px;
   right: 9px;
   min-width: 27px;
   padding: 6px 10px;
@@ -127,4 +129,27 @@
   width: min(90vw, 420px);
   gap: clamp(8px, 3vw, 28px);
   flex-wrap: wrap;
+}
+
+.howto-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.howto-line img {
+  width: 42px;
+  height: 42px;
+  min-height: unset;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+#howToOverlay .banner {
+  justify-content: flex-start;
+  gap: 18px;
+}
+
+.howto-btn {
+  right: -24px;
 }
