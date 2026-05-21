@@ -17,4 +17,11 @@ class Coin extends DrawableObject {
         this.x = x;
         this.y = y;
     }
+
+    offset = {
+        top: 12,
+        left: 12,
+        right: 12,
+        bottom: 12,
+    }
 }

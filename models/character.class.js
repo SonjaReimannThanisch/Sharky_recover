@@ -26,8 +26,9 @@ class Character extends MovableObject {
     isCinematicDead = false;
     movementInterval = null;
     animationInterval = null;
+
     offset = {
-        top: 120,
+        top: 100,
         left: 40,
         right: 40,
         bottom: 50,

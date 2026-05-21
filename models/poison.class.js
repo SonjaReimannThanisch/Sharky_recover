@@ -16,4 +16,11 @@ class Poison extends DrawableObject {
         this.x = x;
         this.y = y;
     }
+
+    offset = {
+        top: 18,
+        left: 10,
+        right: 10,
+        bottom: 12,
+    }
 }

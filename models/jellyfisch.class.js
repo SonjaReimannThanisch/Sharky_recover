@@ -9,10 +9,10 @@ class Jellyfisch extends MovableObject {
     energy = 100;
     
     offset = {
-        top: 4,
-        left: 4,
-        right: 4,
-        bottom: 4,
+        top: 18,
+        left: 8,
+        right: 8,
+        bottom: 8,
     }
 
     /**
