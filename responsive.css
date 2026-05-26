@@ -43,6 +43,20 @@
   }
 }
 
+@media (orientation: landscape)
+and (min-width: 900px)
+and (pointer: coarse) {
+  .mobile-controls {
+    position: fixed;
+    inset: auto 24px 32px 24px;
+    padding: 0;
+  }
+
+  .mobile-controls button {
+    background: rgba(83, 26, 130, 0.98);
+  }
+}
+
 @media (orientation: landscape) and (max-height: 600px) {
   canvas {
     width: 95vw;
@@ -119,6 +133,9 @@ and (max-width: 900px)  {
     font-size: 10px;
     border-radius: 7px;
     border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
 }

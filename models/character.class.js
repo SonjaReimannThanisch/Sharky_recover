@@ -7,7 +7,7 @@ class Character extends MovableObject {
     y = 80;
     world;
     speed = 10;
-    minY = -130;
+    minY = -40;
     maxY;
     lastAttack = 0;
     attackCooldown = 400;
