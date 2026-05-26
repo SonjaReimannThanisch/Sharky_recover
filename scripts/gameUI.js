@@ -53,7 +53,7 @@ function injectMobileControls() {
           <button id="mobile-right" style="transform: rotate(90deg);">▲</button>
         </div>
       </div>
-
+      <button id="mobile-home">ESC</button>
       <div class="mobile-action">
         <button id="mobile-fin">Fin</button>
         <button id="mobile-bubble">Bubble</button>
@@ -201,11 +201,14 @@ function updateMuteButton(worldInstance) {
  */
 function bindMobileControls(worldInstance) {
   bindMobileButton('mobile-left', worldInstance, 'LEFT');
-  bindMobileButton('mobile-right', worldInstance, 'RIGHT');
+  bindMobileButton('mobikle-right', worldInstance, 'RIGHT');
   bindMobileButton('mobile-up', worldInstance, 'UP');
   bindMobileButton('mobile-down', worldInstance, 'DOWN');
   bindMobileButton('mobile-fin', worldInstance, 'SPACE');
   bindMobileButton('mobile-bubble', worldInstance, 'D');
+  document.getElementById('mobile-home')?.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    worldInstance.goHome();});
   document.getElementById('mobile-controls')
     ?.addEventListener('contextmenu', event => event.preventDefault());
 }

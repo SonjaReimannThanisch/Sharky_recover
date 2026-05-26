@@ -351,6 +351,7 @@ class World {
          this.ui.hideWinScreen();
         this.resetWorldState();
         document.getElementById('startscreen')?.classList.remove('hidden');
+        document.getElementById('mobile-controls')?.classList.add('hidden');
     }
 
     /**
