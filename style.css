@@ -230,6 +230,7 @@ p { color: var(--color-text-soft); font-size: large; }
 }
 
 .mobile-controls {
+  display: none;
   position: absolute;
   inset: auto 0 16px 0;
   display: none;

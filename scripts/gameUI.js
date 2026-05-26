@@ -44,7 +44,7 @@ function injectMobileControls() {
   if (document.getElementById('mobile-controls')) return;
 
   let markup = `
-    <div id="mobile-controls" class="mobile-controls">
+    <div id="mobile-controls" class="mobile-controls hidden">
       <div class="mobile-move">
         <button id="mobile-up">▲</button>
         <div>
@@ -84,6 +84,7 @@ function injectGameHud() {
  */
 function startFromStartscreen(worldInstance) {
   document.getElementById('startscreen')?.classList.add('hidden');
+  document.getElementById('mobile-controls')?.classList.remove('hidden');
   worldInstance.startGame();
 }
 
