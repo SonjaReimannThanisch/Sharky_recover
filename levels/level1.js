@@ -114,10 +114,28 @@ function createBackground() {
  * @returns {Array<Barriers>} The barrier objects.
  */
 function createBarriers() {
-    let barrierTwo = new Barriers('img/3.Background/Barrier/2.png', 950, 150, 420, 320);
-    barrierTwo.offset = { top: 90, left: 90, right: 80, bottom: 0 };
+    let barrierTwoDeco = new Barriers(
+        'img/3.Background/Barrier/2.png', 950, 150, 420, 320);
+    barrierTwoDeco.offset = { top: 9999, left: 9999, right: 9999, bottom: 9999 };
+
+    let barrierTwoBodyEnd = new Barriers('', 1120, 170, 185, 120);
+    barrierTwoBodyEnd.offset = { top: 0, left: 15, right: 15, bottom: 20 };
+
+    let barrierTwoBody = new Barriers('', 1040, 200, 275, 220);
+    barrierTwoBody.offset = { top: 0, left: 15, right: 15, bottom: 20 };
+    
+    let barrierTwoBodyTwo = new Barriers('', 1010, 280, 352, 120);
+    barrierTwoBodyTwo.offset = { top: 0, left: 10, right: 10, bottom: 0 };
+
+    let barrierTwoBase = new Barriers('', 950, 350, 415, 340);
+    barrierTwoBase.offset = { top: 0, left: 25, right: 15, bottom: 0 };
+
     return [
-        barrierTwo,
+        barrierTwoDeco,
+        barrierTwoBodyEnd,
+        barrierTwoBody,
+        barrierTwoBodyTwo,
+        barrierTwoBase,
         new Barriers('img/3.Background/Barrier/3.png', 3440, 10, 200, 240),
         ...createCaveBarrier(),
     ];
@@ -132,10 +150,10 @@ function createCaveBarrier() {
     caveDeco.offset = { top: 9999, left: 9999, right: 9999, bottom: 9999 };
 
     let caveTop = new Barriers('', 2300, 0, 850, 120);
-    caveTop.offset = { top: 0, left: 30, right: 30, bottom: 10 };
+    caveTop.offset = { top: 0, left: 10, right: 10, bottom: 5 };
 
     let caveBottom = new Barriers('', 2300, 360, 850, 120);
-    caveBottom.offset = { top: 30, left: 30, right: 30, bottom: 0 };
+    caveBottom.offset = { top: 25, left: 10, right: 10, bottom: 0 };
 
     return [caveDeco, caveTop, caveBottom];
 }
