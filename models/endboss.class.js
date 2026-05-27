@@ -186,6 +186,7 @@ class Endboss extends MovableObject {
         if (this.animationInterval) return;
 
         this.animationInterval = setInterval(() => {
+            if (this.world?.isGameOver || this.world?.hasWon) return;
             if (this.isIntroducing) {
                 this.playAnimation(this.images.INTRO);
             } else if (this.isActive && this._isHurt) {

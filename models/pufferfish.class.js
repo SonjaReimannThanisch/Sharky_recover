@@ -167,6 +167,7 @@ class Pufferfisch extends MovableObject {
      */
     startAnimation() {
         setInterval(() => {
+            if (this.world?.isGameOver || this.world?.hasWon) return;
             if (this.isDead) {
                 this.playAnimation(this.getDieImages());
             } else {

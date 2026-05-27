@@ -103,6 +103,7 @@ class World {
     triggerGameOverIfDead() {
         if (this.mainCharacter.energy <= 0 && !this.isGameOver) {
             this.isGameOver = true;
+            this.hasStarted = false;
             this.sound.stopAllSounds();
             this.sound.stopAllMusic();
             this.attacks = [];
@@ -205,7 +206,7 @@ class World {
     updateWorldState() {
         let now = Date.now();
         this.updateEnvironment();
-        this.collectibles.update();
+        // this.collectibles.update();
         this.updateMenuState();
         this.updateEnemies();
         this.updateBossFight();
@@ -300,6 +301,7 @@ class World {
         boss.update();
         if (boss.isDead && !this.hasWon) {
             this.hasWon = true;
+            this.hasStarted = false;
             this.ui.showWinScreen();
             this.sound.stopAllMusic();
             this.sound.stopAllSounds();

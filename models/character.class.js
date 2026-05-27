@@ -101,6 +101,7 @@ class Character extends MovableObject {
     startAnimationLoop() {
         if (this.animationInterval) return;
         this.animationInterval = setInterval(() => {
+            if (this.world?.isGameOver || this.world?.hasWon) return;
             this.handleAnimations();
         }, 80);
     }
