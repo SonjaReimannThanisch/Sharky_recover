@@ -232,6 +232,8 @@ class Endboss extends MovableObject {
      */
     takeDamage(type) {
         this.energy -= type === 'poison' ? 20 : 5;
+        this.energy = Math.max(0, this.energy);
+        this.world.statusBoss.setPercentage(this.energy);
     }
 
     /**

@@ -32,6 +32,15 @@ class StatusBar extends DrawableObject {
         'img/4.Marcadores/green/poisoned bubbles/100_copia3.png',
     ];
 
+    IMAGES_STATUS_BOSS = [
+        'img/4.Marcadores/orange/0_ copia_h (1).png',
+        'img/4.Marcadores/orange/20_ copia_h (2).png',
+        'img/4.Marcadores/orange/40_ copia_h (3).png',
+        'img/4.Marcadores/orange/60_ copia_h (4).png',
+        'img/4.Marcadores/orange/80_ copia_h (5).png',
+        'img/4.Marcadores/orange/100_ copia_h (6).png',
+    ];
+
     /**
      * Creates a status bar of the given type.
      * @param {string} type
@@ -41,6 +50,7 @@ class StatusBar extends DrawableObject {
         this.images =
             type === 'coins' ? this.IMAGES_STATUS_COINS :
             type === 'poison' ? this.IMAGES_STATUS_POISON :
+            type === 'boss' ? this.IMAGES_STATUS_BOSS :
             this.IMAGES_STATUS_LIFE;
 
         this.loadImages(this.images);
@@ -50,7 +60,7 @@ class StatusBar extends DrawableObject {
         this.width = 180;
         this.height = 50;
 
-        const start = (type === 'life') ? 100 : 0;
+        const start = (type === 'life' || type === 'boss') ? 100 : 0;
         this.setPercentage(start);
     }
 

@@ -60,9 +60,12 @@ class World {
         this.statusLife = new StatusBar('life');
         this.statusCoins = new StatusBar('coins');
         this.statusPoison = new StatusBar('poison');
+        this.statusBoss = new StatusBar('boss');
         this.statusLife.y = 45;
         this.statusCoins.y = 80;
         this.statusPoison.y = 10;
+        this.statusBoss.x = 470;
+        this.statusBoss.y = 10;
     }
 
     /**
@@ -263,6 +266,7 @@ class World {
         this.addToMap(this.statusLife);
         this.addToMap(this.statusCoins);
         this.addToMap(this.statusPoison);
+        this.drawBossHealthBar();
         this.ui.drawHudWonLayer();
     }
 
@@ -378,4 +382,16 @@ class World {
             boss.startIntro();
         }
     }
+
+    drawBossHealthBar() {
+    if (!this.bossFightStarted || this.hasWon) return;
+    this.ctx.save();
+    this.ctx.translate(this.statusBoss.x + this.statusBoss.width, 0);
+    this.ctx.scale(-1, 1);
+    let oldX = this.statusBoss.x;
+    this.statusBoss.x = 0;
+    this.addToMap(this.statusBoss);
+    this.statusBoss.x = oldX;
+    this.ctx.restore();
+}
 }
