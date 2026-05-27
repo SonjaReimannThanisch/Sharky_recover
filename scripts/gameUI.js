@@ -169,7 +169,6 @@ function toggleFullscreen() {
 function updateStartMuteButton(worldInstance) {
   let btn = document.getElementById('btn-mute-start');
   if (!btn) return;
-
   btn.textContent =
     worldInstance.sound.isMuted ? '🔇' : '🔊';
 }
@@ -320,7 +319,7 @@ function bindMenuSoundButton(worldInstance) {
       event.preventDefault();
       worldInstance.sound.toggleMusic();
       updateMenuSoundButton(worldInstance);
-    });
+  });
 }
 
 /**

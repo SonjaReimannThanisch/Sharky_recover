@@ -386,14 +386,14 @@ class World {
     }
 
     drawBossHealthBar() {
-    if (!this.bossFightStarted || this.hasWon) return;
-    this.ctx.save();
-    this.ctx.translate(this.statusBoss.x + this.statusBoss.width, 0);
-    this.ctx.scale(-1, 1);
-    let oldX = this.statusBoss.x;
-    this.statusBoss.x = 0;
-    this.addToMap(this.statusBoss);
-    this.statusBoss.x = oldX;
-    this.ctx.restore();
-}
+        if (!this.bossFightStarted || this.hasWon) return;
+        this.ctx.save();
+        this.ctx.translate(this.statusBoss.x + this.statusBoss.width, 0);
+        this.ctx.scale(-1, 1);
+        let oldX = this.statusBoss.x;
+        this.statusBoss.x = 0;
+        this.addToMap(this.statusBoss);
+        this.statusBoss.x = oldX;
+        this.ctx.restore();
+    }
 }
