@@ -276,3 +276,38 @@ button {
   border: none;
   outline: none;
 }
+
+.mobile-menu-wrap {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  pointer-events: auto;
+  z-index: 10001;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mobile-menu:not(.hidden) {
+  display: flex;
+}
+
+.mobile-menu.hidden {
+  display: none;
+}
+
+.mobile-menu button,
+#mobile-menu-btn {
+  pointer-events: auto;
+  border: none;
+  border-radius: var(--radius-small);
+  background: rgba(83, 26, 130, 0.92);
+  color: var(--color-accent);
+  font-family: var(--font-main);
+  padding: 8px 10px;
+}

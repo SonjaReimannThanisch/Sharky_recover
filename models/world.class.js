@@ -358,6 +358,8 @@ class World {
         this.resetWorldState();
         document.getElementById('startscreen')?.classList.remove('hidden');
         document.getElementById('mobile-controls')?.classList.add('hidden');
+        document.getElementById('mobile-menu-home')?.classList.add('hidden');
+        document.getElementById('mobile-menu')?.classList.add('hidden');
     }
 
     /**

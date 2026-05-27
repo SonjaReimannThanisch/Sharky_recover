@@ -53,7 +53,7 @@ function injectMobileControls() {
           <button id="mobile-right" style="transform: rotate(90deg);">▲</button>
         </div>
       </div>
-      <button id="mobile-home">ESC</button>
+
       <div class="mobile-action">
         <button id="mobile-fin">Fin</button>
         <button id="mobile-bubble">Bubble</button>
@@ -68,14 +68,21 @@ function injectMobileControls() {
  * Injects the in-game HUD controls.
  */
 function injectGameHud() {
-  if (document.getElementById('btn-mute')) return;
+  if (document.getElementById('mobile-menu-btn')) return;
 
   let markup = `
-    <button id="btn-mute" class="hud-btn" aria-label="Mute music">
-      🔊
-    </button>
+    <div class="mobile-menu-wrap hud-menu">
+      <button id="mobile-menu-btn">☰</button>
+
+      <div id="mobile-menu" class="mobile-menu hidden">
+        <button id="mobile-menu-sound">🔊</button>
+        <button id="mobile-menu-home" class="hidden">🏠</button>
+      </div>
+    </div>
   `;
-  document.getElementById('fullscreen')?.insertAdjacentHTML('beforeend', markup);
+
+  document.getElementById('fullscreen')
+    ?.insertAdjacentHTML('beforeend', markup);
 }
 
 /**
@@ -85,6 +92,7 @@ function injectGameHud() {
 function startFromStartscreen(worldInstance) {
   document.getElementById('startscreen')?.classList.add('hidden');
   document.getElementById('mobile-controls')?.classList.remove('hidden');
+  document.getElementById('mobile-menu-home')?.classList.remove('hidden');
   worldInstance.startGame();
 }
 
@@ -117,7 +125,7 @@ function bindStartButton(worldInstance) {
   document.getElementById('btn-start')?.addEventListener('click', () => {
     worldInstance.sound.playSound('itemsSelect');
     updateStartMuteButton(worldInstance);
-    updateMuteButton(worldInstance);
+    updateMenuSoundButton(worldInstance);
     startFromStartscreen(worldInstance);
   });
 }
@@ -140,6 +148,7 @@ function bindStartMuteButton(worldInstance) {
     worldInstance.sound.playSound('itemsSelect');
     worldInstance.sound.toggleMusic();
     updateStartMuteButton(worldInstance);
+    updateMenuSoundButton(worldInstance);
   });
 }
 
@@ -153,12 +162,22 @@ function toggleFullscreen() {
   else exitFullscreen();
 }
 
+/**
+ * Updates the start screen mute button icon.
+ * @param {World} worldInstance
+ */
 function updateStartMuteButton(worldInstance) {
   let btn = document.getElementById('btn-mute-start');
   if (!btn) return;
-  btn.textContent = worldInstance.sound.isMuted ? '🔇' : '🔊';
+
+  btn.textContent =
+    worldInstance.sound.isMuted ? '🔇' : '🔊';
 }
 
+/**
+ * Enters fullscreen mode for a given element.
+ * @param {HTMLElement} element
+ */
 function enterFullscreen(element) {
   if(element.requestFullscreen) {
     element.requestFullscreen();
@@ -169,6 +188,9 @@ function enterFullscreen(element) {
   }
 }
 
+/**
+ * Exits the current fullscreen mode.
+ */
 function exitFullscreen() {
   if(document.exitFullscreen) {
     document.exitFullscreen();
@@ -178,21 +200,15 @@ function exitFullscreen() {
 }
 
 /**
- * Binds the in-game HUD button interactions.
+ * Updates the burger menu sound button icon.
  * @param {World} worldInstance
  */
-function bindGameHudUi(worldInstance) {
-  document.getElementById('btn-mute')?.addEventListener('click', () => {
-    worldInstance.sound.playSound('itemsSelect');
-    worldInstance.sound.toggleMusic()
-    updateMuteButton(worldInstance);
-  });
-}
-
-function updateMuteButton(worldInstance) {
-  let btn = document.getElementById('btn-mute');
+function updateMenuSoundButton(worldInstance) {
+  let btn = document.getElementById('mobile-menu-sound');
   if (!btn) return;
-  btn.textContent = worldInstance.sound.isMuted ? '🔇' : '🔊';
+
+  btn.textContent =
+    worldInstance.sound.isMuted ? '🔇' : '🔊';
 }
 
 /**
@@ -201,14 +217,11 @@ function updateMuteButton(worldInstance) {
  */
 function bindMobileControls(worldInstance) {
   bindMobileButton('mobile-left', worldInstance, 'LEFT');
-  bindMobileButton('mobikle-right', worldInstance, 'RIGHT');
+  bindMobileButton('mobile-right', worldInstance, 'RIGHT');
   bindMobileButton('mobile-up', worldInstance, 'UP');
   bindMobileButton('mobile-down', worldInstance, 'DOWN');
   bindMobileButton('mobile-fin', worldInstance, 'SPACE');
   bindMobileButton('mobile-bubble', worldInstance, 'D');
-  document.getElementById('mobile-home')?.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    worldInstance.goHome();});
   document.getElementById('mobile-controls')
     ?.addEventListener('contextmenu', event => event.preventDefault());
 }
@@ -258,4 +271,61 @@ function openHowTo() {
  */
 function closeHowTo() {
   document.getElementById('howToOverlay')?.classList.add('hidden');
+}
+
+/**
+ * Binds all burger menu interactions.
+ * @param {World} worldInstance
+ */
+function bindMobileMenu(worldInstance) {
+  bindMenuToggle();
+  bindMenuHomeButton(worldInstance);
+  bindMenuSoundButton(worldInstance);
+}
+
+/**
+ * Toggles the burger menu visibility.
+ */
+function bindMenuToggle() {
+  let menuBtn = document.getElementById('mobile-menu-btn');
+  let menu = document.getElementById('mobile-menu');
+  if (!menuBtn || !menu) return;
+
+  menuBtn.addEventListener('pointerdown', event => {
+    event.preventDefault();
+    menu.classList.toggle('hidden');
+  });
+}
+
+/**
+ * Binds the home button inside the burger menu.
+ * @param {World} worldInstance
+ */
+function bindMenuHomeButton(worldInstance) {
+  document.getElementById('mobile-menu-home')
+    ?.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      closeMobileMenu();
+      worldInstance.goHome();
+    });
+}
+
+/**
+ * Binds the sound button inside the burger menu.
+ * @param {World} worldInstance
+ */
+function bindMenuSoundButton(worldInstance) {
+  document.getElementById('mobile-menu-sound')
+    ?.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      worldInstance.sound.toggleMusic();
+      updateMenuSoundButton(worldInstance);
+    });
+}
+
+/**
+ * Closes the burger menu.
+ */
+function closeMobileMenu() {
+  document.getElementById('mobile-menu')?.classList.add('hidden');
 }

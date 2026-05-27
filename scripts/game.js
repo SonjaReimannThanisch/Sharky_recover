@@ -16,8 +16,8 @@ function init() {
   injectGameHud();
   injectMobileControls();
   bindMobileControls(gameWorld);
-  bindGameHudUi(gameWorld);
-  updateMuteButton(gameWorld);
+  bindMobileMenu(gameWorld);
+  updateMenuSoundButton(gameWorld);
   setupAudioUnlock();
 }
 
